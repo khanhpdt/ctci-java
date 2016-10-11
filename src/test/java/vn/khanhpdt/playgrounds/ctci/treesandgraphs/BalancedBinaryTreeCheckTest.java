@@ -5,9 +5,7 @@ import org.junit.Test;
 import vn.khanhpdt.playgrounds.datastructures.nodes.BinaryTreeNode;
 import vn.khanhpdt.playgrounds.datastructures.trees.BinarySearchTree;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,40 +16,36 @@ import static org.hamcrest.core.Is.is;
  */
 public class BalancedBinaryTreeCheckTest {
 
-	private BinarySearchTree<UUID, Integer> defaultBST;
+	private BinarySearchTree<UUID, Integer> bst;
 
 	@Before
 	public void init() {
-		defaultBST = getDefaultTree();
+		initBST();
 	}
 
-	private BinarySearchTree<UUID, Integer> getDefaultTree() {
-		List<BinaryTreeNode<UUID, Integer>> nodes =
-				Stream.of(30, 20, 25, 35, 15, 40, 32)
-						.map(value -> BinaryTreeNode.from(UUID.randomUUID(), value))
-						.collect(Collectors.toList());
-
-		BinarySearchTree<UUID, Integer> bst = new BinarySearchTree<>();
-		nodes.forEach(bst::insert);
-		return bst;
+	private void initBST() {
+		bst = new BinarySearchTree<>();
+		Stream.of(30, 20, 25, 35, 15, 40, 32)
+				.map(value -> BinaryTreeNode.from(UUID.randomUUID(), value))
+				.forEach(bst::insert);
 	}
 
 	@Test
 	public void testBalanced_completeTree() {
-		assertThat(BalancedBinaryTreeCheck.isBalanced(defaultBST.getRoot()), is(true));
+		assertThat(BalancedBinaryTreeCheck.isBalanced(bst.getRoot()), is(true));
 	}
 
 	@Test
 	public void testBalanced_incompleteTree() {
-		defaultBST.remove(32);
-		assertThat(BalancedBinaryTreeCheck.isBalanced(defaultBST.getRoot()), is(true));
+		bst.remove(32);
+		assertThat(BalancedBinaryTreeCheck.isBalanced(bst.getRoot()), is(true));
 	}
 
 	@Test
 	public void testUnbalanced() {
-		defaultBST.insert(BinaryTreeNode.from(UUID.randomUUID(), 12));
-		defaultBST.insert(BinaryTreeNode.from(UUID.randomUUID(), 10));
-		assertThat(BalancedBinaryTreeCheck.isBalanced(defaultBST.getRoot()), is(false));
+		bst.insert(BinaryTreeNode.from(UUID.randomUUID(), 12));
+		bst.insert(BinaryTreeNode.from(UUID.randomUUID(), 10));
+		assertThat(BalancedBinaryTreeCheck.isBalanced(bst.getRoot()), is(false));
 	}
 
 }
