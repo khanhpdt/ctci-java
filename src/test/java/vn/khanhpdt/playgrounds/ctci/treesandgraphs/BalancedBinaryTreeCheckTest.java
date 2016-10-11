@@ -32,20 +32,20 @@ public class BalancedBinaryTreeCheckTest {
 
 	@Test
 	public void testBalanced_completeTree() {
-		assertThat(BalancedBinaryTreeCheck.isBalanced(bst.getRoot()), is(true));
+		assertThat(BalancedBinaryTreeCheck.isBalanced(bst), is(true));
 	}
 
 	@Test
 	public void testBalanced_incompleteTree() {
 		bst.remove(32);
-		assertThat(BalancedBinaryTreeCheck.isBalanced(bst.getRoot()), is(true));
+		assertThat(BalancedBinaryTreeCheck.isBalanced(bst), is(true));
 	}
 
 	@Test
 	public void testUnbalanced() {
 		bst.insert(BinaryTreeNode.from(UUID.randomUUID(), 12));
 		bst.insert(BinaryTreeNode.from(UUID.randomUUID(), 10));
-		assertThat(BalancedBinaryTreeCheck.isBalanced(bst.getRoot()), is(false));
+		assertThat(BalancedBinaryTreeCheck.isBalanced(bst), is(false));
 	}
 
 }

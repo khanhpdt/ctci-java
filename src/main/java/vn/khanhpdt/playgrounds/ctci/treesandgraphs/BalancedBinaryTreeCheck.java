@@ -1,6 +1,7 @@
 package vn.khanhpdt.playgrounds.ctci.treesandgraphs;
 
 import vn.khanhpdt.playgrounds.datastructures.nodes.BinaryTreeNode;
+import vn.khanhpdt.playgrounds.datastructures.trees.BinarySearchTree;
 
 /**
  * Problem 4.1
@@ -9,20 +10,21 @@ import vn.khanhpdt.playgrounds.datastructures.nodes.BinaryTreeNode;
  */
 class BalancedBinaryTreeCheck {
 
-	static <K, V extends Comparable<V>> boolean isBalanced(BinaryTreeNode<K, V> root) {
+	static <K, V extends Comparable<V>> boolean isBalanced(BinarySearchTree<K, V> bst) {
+		if (bst == null) {
+			throw new IllegalArgumentException("Null tree!");
+		}
+		return isBalanced(bst.getRoot());
+	}
+
+	private static <K, V extends Comparable<V>> boolean isBalanced(BinaryTreeNode<K, V> root) {
+		// empty tree is balanced
 		if (root.isNull()) {
 			return true;
 		}
 
-		boolean balanced = Math.abs(getHeight(root.getLeft()) - getHeight(root.getRight())) <= 1;
+		boolean balanced = Math.abs(root.getLeft().getHeight() - root.getRight().getHeight()) <= 1;
 		return balanced && isBalanced(root.getLeft()) && isBalanced(root.getRight());
-	}
-
-	private static <K, V extends Comparable<V>> int getHeight(BinaryTreeNode<K, V> root) {
-		if (root.isNull()) {
-			return 0;
-		}
-		return 1 + Math.max(getHeight(root.getLeft()), getHeight(root.getRight()));
 	}
 
 }
