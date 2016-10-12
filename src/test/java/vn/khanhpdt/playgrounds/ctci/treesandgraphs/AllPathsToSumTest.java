@@ -34,7 +34,7 @@ public class AllPathsToSumTest {
 	}
 
 	@Test
-	public void test() {
+	public void test_PathsFromRoot() {
 		Stream.of(30, 20, 45, 15, 25, 10, 23, 28)
 				.map(value -> BinarySearchTreeNode.from(UUID.randomUUID(), value))
 				.forEach(bst::insert);
@@ -45,6 +45,20 @@ public class AllPathsToSumTest {
 		assertThat(paths, hasItem(hasNodes(30, 20, 15, 10)));
 		assertThat(paths, hasItem(hasNodes(30, 20, 25)));
 		assertThat(paths, hasItem(hasNodes(30, 45)));
+	}
+
+	@Test
+	public void test_PathsInternalNodes() {
+		Stream.of(30, 20, 45, 15, 25, 10, 23, 28)
+				.map(value -> BinarySearchTreeNode.from(UUID.randomUUID(), value))
+				.forEach(bst::insert);
+
+		List<List<BinaryTreeNode<UUID, Integer>>> paths = AllPathsToSum.find(bst, 45);
+
+		assertThat(paths, hasSize(3));
+		assertThat(paths, hasItem(hasNodes(20, 15, 10)));
+		assertThat(paths, hasItem(hasNodes(20, 25)));
+		assertThat(paths, hasItem(hasNodes(45)));
 	}
 
 	private static Matcher<List<BinaryTreeNode<UUID, Integer>>> hasNodes(int... expectedNodeValues) {
