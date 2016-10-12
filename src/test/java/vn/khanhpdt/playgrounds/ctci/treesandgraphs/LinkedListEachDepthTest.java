@@ -3,6 +3,7 @@ package vn.khanhpdt.playgrounds.ctci.treesandgraphs;
 import org.junit.Before;
 import org.junit.Test;
 import vn.khanhpdt.playgrounds.datastructures.linkedlists.SinglyLinkedList;
+import vn.khanhpdt.playgrounds.datastructures.nodes.BinarySearchTreeNode;
 import vn.khanhpdt.playgrounds.datastructures.nodes.BinaryTreeNode;
 import vn.khanhpdt.playgrounds.datastructures.trees.BinarySearchTree;
 
@@ -28,7 +29,7 @@ public class LinkedListEachDepthTest {
 	private void initBST() {
 		bst = new BinarySearchTree<>();
 		Stream.of(30, 20, 25, 35, 15, 32, 28, 34)
-				.map(value -> BinaryTreeNode.from(UUID.randomUUID(), value))
+				.map(value -> BinarySearchTreeNode.from(UUID.randomUUID(), value))
 				.forEach(bst::insert);
 	}
 

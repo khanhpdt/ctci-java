@@ -1,6 +1,6 @@
 package vn.khanhpdt.playgrounds.ctci.treesandgraphs;
 
-import vn.khanhpdt.playgrounds.datastructures.nodes.BinaryTreeNode;
+import vn.khanhpdt.playgrounds.datastructures.nodes.BinarySearchTreeNode;
 import vn.khanhpdt.playgrounds.datastructures.trees.BinarySearchTree;
 
 import java.util.UUID;
@@ -24,7 +24,7 @@ class MinimumHeightBST {
 		}
 
 		int middle = from + (int) Math.ceil((to - from) / 2);
-		bst.insert(BinaryTreeNode.from(UUID.randomUUID(), sortedIntegers[middle]));
+		bst.insert(BinarySearchTreeNode.from(UUID.randomUUID(), sortedIntegers[middle]));
 		buildFrom(sortedIntegers, from, middle - 1, bst);
 		buildFrom(sortedIntegers, middle + 1, to, bst);
 	}

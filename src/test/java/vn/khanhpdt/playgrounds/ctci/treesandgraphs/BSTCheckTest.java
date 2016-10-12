@@ -2,6 +2,7 @@ package vn.khanhpdt.playgrounds.ctci.treesandgraphs;
 
 import org.junit.Before;
 import org.junit.Test;
+import vn.khanhpdt.playgrounds.datastructures.nodes.BinarySearchTreeNode;
 import vn.khanhpdt.playgrounds.datastructures.nodes.BinaryTreeNode;
 import vn.khanhpdt.playgrounds.datastructures.trees.BinarySearchTree;
 
@@ -26,7 +27,7 @@ public class BSTCheckTest {
 	private void initBST() {
 		bst = new BinarySearchTree<>();
 		Stream.of(30, 20, 25, 35, 15, 32, 28, 34)
-				.map(value -> BinaryTreeNode.from(UUID.randomUUID(), value))
+				.map(value -> BinarySearchTreeNode.from(UUID.randomUUID(), value))
 				.forEach(bst::insert);
 	}
 
@@ -39,7 +40,7 @@ public class BSTCheckTest {
 	public void testNonBST() {
 		// make a node smaller than its left node to break the bst properties
 		BinaryTreeNode<UUID, Integer> node = bst.getRoot().getLeft().getRight();
-		node.setLeft(BinaryTreeNode.from(UUID.randomUUID(), node.getValue() + 1));
+		node.setLeft(BinarySearchTreeNode.from(UUID.randomUUID(), node.getValue() + 1));
 
 		assertThat(BSTCheck.isBST(bst.getRoot()), is(false));
 	}
