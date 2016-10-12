@@ -41,6 +41,7 @@ class AllPathsToSum {
 			return;
 		}
 
+		// save the current path to a local variable for backtracking
 		List<BinaryTreeNode<UUID, Integer>> currentPathLocal = new ArrayList<>(currentPath);
 		currentPathLocal.add(source);
 
