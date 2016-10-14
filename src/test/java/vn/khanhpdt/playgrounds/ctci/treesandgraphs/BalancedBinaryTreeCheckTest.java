@@ -48,4 +48,22 @@ public class BalancedBinaryTreeCheckTest {
 		assertThat(BalancedBinaryTreeCheck.isBalanced(bst), is(false));
 	}
 
+	@Test
+	public void testBalanced2_completeTree() {
+		assertThat(BalancedBinaryTreeCheck.isBalanced2(bst), is(true));
+	}
+
+	@Test
+	public void testBalanced2_incompleteTree() {
+		bst.remove(32);
+		assertThat(BalancedBinaryTreeCheck.isBalanced2(bst), is(true));
+	}
+
+	@Test
+	public void testUnbalanced2() {
+		bst.insert(BinarySearchTreeNode.from(UUID.randomUUID(), 12));
+		bst.insert(BinarySearchTreeNode.from(UUID.randomUUID(), 10));
+		assertThat(BalancedBinaryTreeCheck.isBalanced2(bst), is(false));
+	}
+
 }
