@@ -20,15 +20,20 @@ class AllPathsToSum {
 		return findPaths(bst.getRoot(), sum);
 	}
 
+	// O(NlgN)
 	private static List<List<BinaryTreeNode<UUID, Integer>>> findPaths(BinarySearchTreeNode<UUID, Integer> source, int sum) {
 		if (source.isNull()) {
 			return Collections.emptyList();
 		}
 
 		List<List<BinaryTreeNode<UUID, Integer>>> result = new ArrayList<>();
+
+		// O(lgN)
 		appendPathsSingleSource(source, sum, new ArrayList<>(), result);
+
 		result.addAll(findPaths(source.getLeft(), sum));
 		result.addAll(findPaths(source.getRight(), sum));
+
 		return result;
 	}
 
