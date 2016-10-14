@@ -36,6 +36,7 @@ class LinkedListEachDepth {
 			result.add(new SinglyLinkedList<>());
 		}
 
+		// should use insertFirst instead of insertLast to improve the running time
 		result.get(level - 1).insertLast(node);
 		collect(node.getLeft(), level + 1, result);
 		collect(node.getRight(), level + 1, result);
