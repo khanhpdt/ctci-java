@@ -30,7 +30,7 @@ class FirstCommonAncestorFinder {
 		return firstNode;
 	}
 
-	static <K, V extends Comparable<V>> BinaryTreeNode<K, V> moveUp(BinaryTreeNode<K, V> node, int nLevels) {
+	private static <K, V extends Comparable<V>> BinaryTreeNode<K, V> moveUp(BinaryTreeNode<K, V> node, int nLevels) {
 		BinaryTreeNode<K, V> result = node;
 		int up = 0;
 		while (up < nLevels) {
