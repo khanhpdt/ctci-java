@@ -27,7 +27,7 @@ class BalancedBinaryTreeCheck {
 			return true;
 		}
 
-		// O(N)
+		// O(N): cost of calculating height of a root of a tree with N node
 		boolean balanced = Math.abs(root.getLeft().getHeight() - root.getRight().getHeight()) <= 1;
 
 		return balanced && isBalanced(root.getLeft()) && isBalanced(root.getRight());

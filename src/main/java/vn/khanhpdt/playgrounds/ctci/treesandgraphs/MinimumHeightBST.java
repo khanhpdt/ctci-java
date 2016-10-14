@@ -27,7 +27,7 @@ class MinimumHeightBST {
 
 		int middle = from + (int) Math.ceil((to - from) / 2);
 
-		// O(lgN)
+		// O(lgN): cost of inserting one node
 		bst.insert(BinarySearchTreeNode.from(UUID.randomUUID(), sortedIntegers[middle]));
 
 		create(sortedIntegers, from, middle - 1, bst);
@@ -37,6 +37,7 @@ class MinimumHeightBST {
 	// O(N)
 	static BinarySearchTree<UUID, Integer> create2(int[] sortedIntegers) {
 		BinarySearchTreeNode<UUID, Integer> root = create2(sortedIntegers, 0, sortedIntegers.length - 1);
+		// O(1) to create the tree from a given root
 		return new BinarySearchTree<>(root);
 	}
 
@@ -47,8 +48,10 @@ class MinimumHeightBST {
 
 		int middle = from + (int) Math.ceil((to - from) / 2);
 
+		// O(1) to create a node
 		BinarySearchTreeNode<UUID, Integer> node = BinarySearchTreeNode.from(UUID.randomUUID(), sortedIntegers[middle]);
 
+		// O(1) to links the nodes
 		node.setLeft(create2(sortedIntegers, from, middle - 1));
 		node.setRight(create2(sortedIntegers, middle + 1, to));
 
