@@ -29,32 +29,62 @@ public class RouteCheckTest {
 	}
 
 	@Test
-	public void testExists_1() {
-		assertThat(RouteCheck.checkExists(graph.getVertex(3), graph.getVertex(1)), is(true));
+	public void testExistsDFS_exists_1() {
+		assertThat(RouteCheck.checkExistsDFS(graph.getVertex(3), graph.getVertex(1)), is(true));
 	}
 
 	@Test
-	public void testExists_2() {
-		assertThat(RouteCheck.checkExists(graph.getVertex(0), graph.getVertex(2)), is(true));
+	public void testExistsDFS_exists_2() {
+		assertThat(RouteCheck.checkExistsDFS(graph.getVertex(0), graph.getVertex(2)), is(true));
 	}
 
 	@Test
-	public void testExists_3() {
-		assertThat(RouteCheck.checkExists(graph.getVertex(4), graph.getVertex(1)), is(true));
+	public void testExistsDFS_exists_3() {
+		assertThat(RouteCheck.checkExistsDFS(graph.getVertex(4), graph.getVertex(1)), is(true));
 	}
 
 	@Test
-	public void testNotExists_1() {
-		assertThat(RouteCheck.checkExists(graph.getVertex(1), graph.getVertex(5)), is(false));
+	public void testExistsDFS_notExists_1() {
+		assertThat(RouteCheck.checkExistsDFS(graph.getVertex(1), graph.getVertex(5)), is(false));
 	}
 
 	@Test
-	public void testNotExists_2() {
-		assertThat(RouteCheck.checkExists(graph.getVertex(4), graph.getVertex(3)), is(false));
+	public void testExistsDFS_notExists_2() {
+		assertThat(RouteCheck.checkExistsDFS(graph.getVertex(4), graph.getVertex(3)), is(false));
 	}
 
 	@Test
-	public void testNotExists_3() {
-		assertThat(RouteCheck.checkExists(graph.getVertex(5), graph.getVertex(0)), is(false));
+	public void testExistsDFS_notExists_3() {
+		assertThat(RouteCheck.checkExistsDFS(graph.getVertex(5), graph.getVertex(0)), is(false));
+	}
+
+	@Test
+	public void testExistsBFS_1() {
+		assertThat(RouteCheck.checkExistsBFS(graph.getVertex(3), graph.getVertex(1)), is(true));
+	}
+
+	@Test
+	public void testExistsBFS_2() {
+		assertThat(RouteCheck.checkExistsBFS(graph.getVertex(0), graph.getVertex(2)), is(true));
+	}
+
+	@Test
+	public void testExistsBFS_3() {
+		assertThat(RouteCheck.checkExistsBFS(graph.getVertex(4), graph.getVertex(1)), is(true));
+	}
+
+	@Test
+	public void testExistsBFS_notExists_1() {
+		assertThat(RouteCheck.checkExistsBFS(graph.getVertex(1), graph.getVertex(5)), is(false));
+	}
+
+	@Test
+	public void testExistsBFS_notExists_2() {
+		assertThat(RouteCheck.checkExistsBFS(graph.getVertex(4), graph.getVertex(3)), is(false));
+	}
+
+	@Test
+	public void testExistsBFS_notExists_3() {
+		assertThat(RouteCheck.checkExistsBFS(graph.getVertex(5), graph.getVertex(0)), is(false));
 	}
 }
