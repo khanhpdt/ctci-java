@@ -14,16 +14,27 @@ class BSTCheck {
 			return true;
 		}
 
-		boolean largerThanOrEqualToLeft = true;
-		if (root.getLeft().isNotNull()) {
-			largerThanOrEqualToLeft = root.getValue().compareTo(root.getLeft().getValue()) >= 0;
-		}
-		boolean smallerThanOrEqualToRight = true;
-		if (root.getRight().isNotNull()) {
-			smallerThanOrEqualToRight = root.getValue().compareTo(root.getRight().getValue()) <= 0;
-		}
-		boolean rootSafe = largerThanOrEqualToLeft && smallerThanOrEqualToRight;
-
+		boolean rootSafe = isLargerThanOrEqualTo(root, root.getLeft()) && isSmallerThanOrEqualTo(root, root.getRight());
 		return rootSafe && isBST(root.getLeft()) && isBST(root.getRight());
+	}
+
+	private static <K, V extends Comparable<V>> boolean isLargerThanOrEqualTo(BinaryTreeNode<K, V> root,
+	                                                                          BinaryTreeNode<K, V> subtreeRoot) {
+		if (subtreeRoot.isNull()) {
+			return true;
+		}
+		return root.compareTo(subtreeRoot) >= 0
+				&& isLargerThanOrEqualTo(root, subtreeRoot.getLeft())
+				&& isLargerThanOrEqualTo(root, subtreeRoot.getRight());
+	}
+
+	private static <K, V extends Comparable<V>> boolean isSmallerThanOrEqualTo(BinaryTreeNode<K, V> root,
+	                                                                           BinaryTreeNode<K, V> subtreeRoot) {
+		if (subtreeRoot.isNull()) {
+			return true;
+		}
+		return root.compareTo(subtreeRoot) <= 0
+				&& isSmallerThanOrEqualTo(root, subtreeRoot.getLeft())
+				&& isSmallerThanOrEqualTo(root, subtreeRoot.getRight());
 	}
 }

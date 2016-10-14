@@ -45,4 +45,13 @@ public class BSTCheckTest {
 		assertThat(BSTCheck.isBST(bst.getRoot()), is(false));
 	}
 
+	@Test
+	public void testNonBST_2() {
+		// make node 20 larger than one node in its right subtree
+		BinaryTreeNode<UUID, Integer> node = bst.getRoot().getLeft().getRight();
+		node.setLeft(BinarySearchTreeNode.from(UUID.randomUUID(), 18));
+
+		assertThat(BSTCheck.isBST(bst.getRoot()), is(false));
+	}
+
 }
