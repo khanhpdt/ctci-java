@@ -54,4 +54,27 @@ public class BSTCheckTest {
 		assertThat(BSTCheck.isBST(bst.getRoot()), is(false));
 	}
 
+	@Test
+	public void testBST2() {
+		assertThat(BSTCheck.isBST2(bst.getRoot()), is(true));
+	}
+
+	@Test
+	public void testNonBST2() {
+		// make a node smaller than its left node to break the bst properties
+		BinaryTreeNode<UUID, Integer> node = bst.getRoot().getLeft().getRight();
+		node.setLeft(BinarySearchTreeNode.from(UUID.randomUUID(), node.getValue() + 1));
+
+		assertThat(BSTCheck.isBST2(bst.getRoot()), is(false));
+	}
+
+	@Test
+	public void testNonBST2_2() {
+		// make node 20 larger than one node in its right subtree
+		BinaryTreeNode<UUID, Integer> node = bst.getRoot().getLeft().getRight();
+		node.setLeft(BinarySearchTreeNode.from(UUID.randomUUID(), 18));
+
+		assertThat(BSTCheck.isBST2(bst.getRoot()), is(false));
+	}
+
 }
