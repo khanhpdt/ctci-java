@@ -23,4 +23,27 @@ public class BitManipulationSolutionsTest {
         assertThat(BitManipulationSolutions.fractionInBinary(0.625), is("0.101"));
         assertThat(BitManipulationSolutions.fractionInBinary(0.72), is("ERROR"));
     }
+
+    @Test
+    public void testGetNextLargerNumberSameOneBitCount() {
+        assertThat(BitManipulationSolutions.getNextLargerNumberSameOneBitCount(0b101), is(0b110));
+        assertThat(BitManipulationSolutions.getNextLargerNumberSameOneBitCount(0b1110), is(0b10011));
+    }
+
+    @Test
+    public void testGetNextLargerNumberSameOneBitCount2() {
+        assertThat(BitManipulationSolutions.getNextLargerNumberSameOneBitCount_2(0b101), is(0b110));
+        assertThat(BitManipulationSolutions.getNextLargerNumberSameOneBitCount_2(0b1110), is(0b10011));
+    }
+
+    @Test
+    public void testGetNextSmallerNumberSameOneBitCount() {
+        assertThat(BitManipulationSolutions.getNextSmallerNumberSameOneBitCount(0b110), is(0b101));
+        assertThat(BitManipulationSolutions.getNextSmallerNumberSameOneBitCount(0b111100001), is(0b111011000));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetNextSmallerNumberSameOneBitCount_notExist() {
+        BitManipulationSolutions.getNextSmallerNumberSameOneBitCount(0b111111);
+    }
 }
