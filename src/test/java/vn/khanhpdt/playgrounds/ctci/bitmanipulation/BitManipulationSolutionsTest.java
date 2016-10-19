@@ -3,7 +3,7 @@ package vn.khanhpdt.playgrounds.ctci.bitmanipulation;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author khanhpdt
@@ -17,4 +17,10 @@ public class BitManipulationSolutionsTest {
         assertThat(BitManipulationSolutions.injectBits(0b10000, 0b11111, 0, 4), is(0b11111));
     }
 
+    @Test
+    public void testFractionInBinary() throws Exception {
+        assertThat(BitManipulationSolutions.fractionInBinary(0.0625), is("0.0001"));
+        assertThat(BitManipulationSolutions.fractionInBinary(0.625), is("0.101"));
+        assertThat(BitManipulationSolutions.fractionInBinary(0.72), is("ERROR"));
+    }
 }
