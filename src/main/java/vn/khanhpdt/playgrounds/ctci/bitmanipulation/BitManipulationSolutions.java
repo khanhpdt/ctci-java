@@ -1,6 +1,7 @@
 package vn.khanhpdt.playgrounds.ctci.bitmanipulation;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 /**
  * @author khanhpdt
@@ -200,7 +201,8 @@ class BitManipulationSolutions {
     }
 
     /**
-     * Problem 5.6: array manipulation
+     * Problem 5.6
+     * <p> This solution uses array manipulation
      */
     static int swapOddAndEvenBits_2(int n) {
         char[] bits = Integer.toBinaryString(n).toCharArray();
@@ -225,9 +227,50 @@ class BitManipulationSolutions {
         return Integer.parseInt("+" + swappedBits, 2);
     }
 
+    /**
+     * Problem 5.6
+     * <p>This solution uses bit manipulation.
+     */
     static int swapOddAndEvenBits(int n) {
         int oddBits = 0xaaaaaaaa & n;
         int evenBits = 0x55555555 & n;
         return (oddBits >> 1) | (evenBits << 1);
+    }
+
+    /**
+     * Problem 5.7
+     */
+    static int findMissingNumber(int max, int[] binaryNumbers) {
+        // this is also called bitmap data structure
+        boolean[] markers = new boolean[max + 1];
+        Arrays.fill(markers, false);
+
+        for (int binaryNumber : binaryNumbers) {
+            // note: we can only read bit by bit, not the whole integer
+            int number = convertBinaryToDecimal(binaryNumber);
+            markers[number] = true;
+        }
+
+        for (int i = 0; i < markers.length; i++) {
+            if (!markers[i]) return i;
+        }
+
+        throw new IllegalArgumentException("The given array has no missing number!");
+    }
+
+    private static int convertBinaryToDecimal(int binaryNumber) {
+        final int nBits = 32;
+        int result = 0;
+        for (int j = 0; j < nBits; j++) {
+            if (isBitOne(binaryNumber, j)) result += Math.pow(2, j);
+        }
+        return result;
+    }
+
+    /**
+     * Checks if ith bit is 1.
+     */
+    private static boolean isBitOne(int n, int i) {
+        return (n & (1 << i)) != 0;
     }
 }

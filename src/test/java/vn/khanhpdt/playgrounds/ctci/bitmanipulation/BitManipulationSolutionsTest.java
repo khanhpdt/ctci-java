@@ -2,6 +2,8 @@ package vn.khanhpdt.playgrounds.ctci.bitmanipulation;
 
 import org.junit.Test;
 
+import java.util.stream.IntStream;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -63,15 +65,20 @@ public class BitManipulationSolutionsTest {
     }
 
     @Test
-    public void swapOddAndEvenBits() throws Exception {
+    public void testSwapOddAndEvenBits() throws Exception {
         assertThat(BitManipulationSolutions.swapOddAndEvenBits(0b11_10_01_00), is(0b11_01_10_00));
         assertThat(BitManipulationSolutions.swapOddAndEvenBits(0b1_10_01_10), is(0b10_01_10_01));
     }
 
     @Test
-    public void swapOddAndEvenBits2() throws Exception {
+    public void testSwapOddAndEvenBits2() throws Exception {
         assertThat(BitManipulationSolutions.swapOddAndEvenBits_2(0b11_10_01_00), is(0b11_01_10_00));
         assertThat(BitManipulationSolutions.swapOddAndEvenBits_2(0b1_10_01_10), is(0b10_01_10_01));
     }
 
+    @Test
+    public void testFindMissingNumber() throws Exception {
+        assertThat(BitManipulationSolutions.findMissingNumber(20, IntStream.range(0, 21).filter(i -> i != 12).toArray()), is(12));
+        assertThat(BitManipulationSolutions.findMissingNumber(100, IntStream.range(0, 101).filter(i -> i != 81).toArray()), is(81));
+    }
 }
