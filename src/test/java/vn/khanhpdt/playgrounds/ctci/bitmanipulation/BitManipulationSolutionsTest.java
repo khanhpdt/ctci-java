@@ -54,4 +54,11 @@ public class BitManipulationSolutionsTest {
         assertThat(BitManipulationSolutions.problem54(0b1_1000000), is(0b1_0000000));
         assertThat(BitManipulationSolutions.problem54(0b1_000000), is(0));
     }
+
+    @Test
+    public void testNumberOfBitsToConvert() throws Exception {
+        assertThat(BitManipulationSolutions.countNumberOfBitsToConvert(0b11111, 0b1110), is(2));
+        assertThat(BitManipulationSolutions.countNumberOfBitsToConvert(0b11_010_111, 0b11_101_111), is(3));
+        assertThat(BitManipulationSolutions.countNumberOfBitsToConvert(0b101010101_11, 0b11), is(5));
+    }
 }

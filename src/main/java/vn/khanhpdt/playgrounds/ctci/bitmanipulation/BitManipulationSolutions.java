@@ -185,4 +185,14 @@ class BitManipulationSolutions {
         // n & (n - 1) clear the right most bit 1
         return n & (n - 1);
     }
+
+    static int countNumberOfBitsToConvert(int a, int b) {
+        int xor = a ^ b;
+        // since xor contains 1 bit where the bits in a and b are different, we only need to count the bit 1 in xor.
+        int result = 0;
+        for (char bit : Integer.toBinaryString(xor).toCharArray()) {
+            if (bit == '1') result++;
+        }
+        return result;
+    }
 }
