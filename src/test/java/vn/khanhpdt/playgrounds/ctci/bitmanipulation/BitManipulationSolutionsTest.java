@@ -2,6 +2,7 @@ package vn.khanhpdt.playgrounds.ctci.bitmanipulation;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 import static org.hamcrest.core.Is.is;
@@ -80,5 +81,31 @@ public class BitManipulationSolutionsTest {
     public void testFindMissingNumber() throws Exception {
         assertThat(BitManipulationSolutions.findMissingNumber(20, IntStream.range(0, 21).filter(i -> i != 12).toArray()), is(12));
         assertThat(BitManipulationSolutions.findMissingNumber(100, IntStream.range(0, 101).filter(i -> i != 81).toArray()), is(81));
+    }
+
+    @Test
+    public void testDrawHorizontalLine_widthEight() {
+        // 8x10 screen
+        int width = 8;
+        byte[] screen = new byte[20];
+        Arrays.fill(screen, (byte)0);
+
+        BitManipulationSolutions.drawHorizontalLine(screen, width, 0, 7, 2);
+
+        assertThat(screen[2], is((byte)0b11111111));
+    }
+
+    @Test
+    public void testDrawHorizontalLine_widthMultipleEight() {
+        // 24x10 screen
+        int width = 24;
+        byte[] screen = new byte[30];
+        Arrays.fill(screen, (byte)0);
+
+        BitManipulationSolutions.drawHorizontalLine(screen, width, 2, 20, 3);
+
+        assertThat(screen[9], is((byte)0b00111111));
+        assertThat(screen[10], is((byte)0b11111111));
+        assertThat(screen[11], is((byte)0b11111000));
     }
 }

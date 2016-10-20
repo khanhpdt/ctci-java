@@ -273,4 +273,19 @@ class BitManipulationSolutions {
     private static boolean isBitOne(int n, int i) {
         return (n & (1 << i)) != 0;
     }
+
+    /**
+     * Problem 5.8
+     */
+    static void drawHorizontalLine(byte[] screen, int width, int x1, int x2, int y) {
+        final int nBits = 8;
+        final int nBytesPerRow = width / nBits;
+        final int rowIndex = y * nBytesPerRow;
+
+        for (int w = Math.min(x1, x2); w <= Math.max(x1, x2); w++) {
+            int subRowIndex = rowIndex + (w / nBits);
+            int colInRow = w % nBits;
+            screen[subRowIndex] |= (1 << (nBits - 1 - colInRow));
+        }
+    }
 }
