@@ -46,4 +46,12 @@ public class BitManipulationSolutionsTest {
     public void testGetNextSmallerNumberSameOneBitCount_notExist() {
         BitManipulationSolutions.getNextSmallerNumberSameOneBitCount(0b111111);
     }
+
+    @Test
+    public void testProblem54() throws Exception {
+        assertThat(BitManipulationSolutions.problem54(0b111011_1), is(0b111011_0));
+        assertThat(BitManipulationSolutions.problem54(0b11101_100), is(0b11101_000));
+        assertThat(BitManipulationSolutions.problem54(0b1_1000000), is(0b1_0000000));
+        assertThat(BitManipulationSolutions.problem54(0b1_000000), is(0));
+    }
 }

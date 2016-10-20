@@ -177,4 +177,12 @@ class BitManipulationSolutions {
 
         return result;
     }
+
+    /**
+     * Problem 5.4: Test what (n & (n - 1)) does
+     */
+    static int problem54(int n) {
+        // n & (n - 1) clear the right most bit 1
+        return n & (n - 1);
+    }
 }
