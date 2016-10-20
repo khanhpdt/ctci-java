@@ -61,4 +61,17 @@ public class BitManipulationSolutionsTest {
         assertThat(BitManipulationSolutions.countNumberOfBitsToConvert(0b11_010_111, 0b11_101_111), is(3));
         assertThat(BitManipulationSolutions.countNumberOfBitsToConvert(0b101010101_11, 0b11), is(5));
     }
+
+    @Test
+    public void swapOddAndEvenBits() throws Exception {
+        assertThat(BitManipulationSolutions.swapOddAndEvenBits(0b11_10_01_00), is(0b11_01_10_00));
+        assertThat(BitManipulationSolutions.swapOddAndEvenBits(0b1_10_01_10), is(0b10_01_10_01));
+    }
+
+    @Test
+    public void swapOddAndEvenBits2() throws Exception {
+        assertThat(BitManipulationSolutions.swapOddAndEvenBits_2(0b11_10_01_00), is(0b11_01_10_00));
+        assertThat(BitManipulationSolutions.swapOddAndEvenBits_2(0b1_10_01_10), is(0b10_01_10_01));
+    }
+
 }

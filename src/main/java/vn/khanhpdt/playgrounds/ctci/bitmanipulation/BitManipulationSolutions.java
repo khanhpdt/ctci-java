@@ -179,13 +179,16 @@ class BitManipulationSolutions {
     }
 
     /**
-     * Problem 5.4: Test what (n & (n - 1)) does
+     * Problem 5.4: Test what (n & (n - 1)) does.
      */
     static int problem54(int n) {
         // n & (n - 1) clear the right most bit 1
         return n & (n - 1);
     }
 
+    /**
+     * Problem 5.5
+     */
     static int countNumberOfBitsToConvert(int a, int b) {
         int xor = a ^ b;
         // since xor contains 1 bit where the bits in a and b are different, we only need to count the bit 1 in xor.
@@ -194,5 +197,37 @@ class BitManipulationSolutions {
             if (bit == '1') result++;
         }
         return result;
+    }
+
+    /**
+     * Problem 5.6: array manipulation
+     */
+    static int swapOddAndEvenBits_2(int n) {
+        char[] bits = Integer.toBinaryString(n).toCharArray();
+        // start from the LSB (the 0th bit) at the end of the bit array
+        int i = bits.length - 1;
+        for (;i >= 1; i -= 2) {
+            char tmp = bits[i];
+            bits[i] = bits[i - 1];
+            bits[i - 1] = tmp;
+        }
+
+        String swappedBits;
+        if (i == 0) {
+            // the length of the bit array is odd. the first bit must be 1 and was not swapped yet.
+            bits[0] = '0';
+            swappedBits = "1" + String.valueOf(bits);
+        } else {
+            swappedBits = String.valueOf(bits);
+        }
+
+        // assume that we only handle positive numbers
+        return Integer.parseInt("+" + swappedBits, 2);
+    }
+
+    static int swapOddAndEvenBits(int n) {
+        int oddBits = 0xaaaaaaaa & n;
+        int evenBits = 0x55555555 & n;
+        return (oddBits >> 1) | (evenBits << 1);
     }
 }
