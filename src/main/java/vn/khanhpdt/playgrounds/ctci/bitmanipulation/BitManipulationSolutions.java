@@ -265,9 +265,10 @@ class BitManipulationSolutions {
 
     /**
      * Problem 5.7
+     * <p>Use bitmap data structure.</p>
      */
     static int findMissingNumber(int max, int[] binaryNumbers) {
-        // this is also called bitmap data structure
+        // also called bitmap data structure
         boolean[] markers = new boolean[max + 1];
         Arrays.fill(markers, false);
 
@@ -282,6 +283,25 @@ class BitManipulationSolutions {
         }
 
         throw new IllegalArgumentException("The given array has no missing number!");
+    }
+
+	/**
+	 * Problem 5.7
+	 * <p>Use sum.</p>
+	 */
+    static int findMissingNumber_2(int max, int[] binaryNumbers) {
+	    // sum from 0 to max except the missing number
+        long sum = 0;
+        for (int binaryNumber : binaryNumbers) {
+            // note: we can only read bit by bit, not the whole integer
+            int number = convertBinaryToDecimal(binaryNumber);
+	        sum += number;
+        }
+
+        // sum from 0 to max
+	    long sumAll = (max * (max + 1)) / 2;
+
+	    return (int) (sumAll - sum);
     }
 
     private static int convertBinaryToDecimal(int binaryNumber) {
