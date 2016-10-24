@@ -58,11 +58,18 @@ public class BitManipulationSolutionsTest {
         assertThat(BitManipulationSolutions.problem54(0b1_1_000000), is(false));
     }
 
+	@Test
+	public void testNumberOfBitsToConvert() throws Exception {
+		assertThat(BitManipulationSolutions.countNumberOfBitsToConvert(0b11111, 0b1110), is(2));
+		assertThat(BitManipulationSolutions.countNumberOfBitsToConvert(0b11_010_111, 0b11_101_111), is(3));
+		assertThat(BitManipulationSolutions.countNumberOfBitsToConvert(0b101010101_11, 0b11), is(5));
+	}
+
     @Test
-    public void testNumberOfBitsToConvert() throws Exception {
-        assertThat(BitManipulationSolutions.countNumberOfBitsToConvert(0b11111, 0b1110), is(2));
-        assertThat(BitManipulationSolutions.countNumberOfBitsToConvert(0b11_010_111, 0b11_101_111), is(3));
-        assertThat(BitManipulationSolutions.countNumberOfBitsToConvert(0b101010101_11, 0b11), is(5));
+    public void testNumberOfBitsToConvert_2() throws Exception {
+        assertThat(BitManipulationSolutions.countNumberOfBitsToConvert_2(0b11111, 0b1110), is(2));
+        assertThat(BitManipulationSolutions.countNumberOfBitsToConvert_2(0b11_010_111, 0b11_101_111), is(3));
+        assertThat(BitManipulationSolutions.countNumberOfBitsToConvert_2(0b101010101_11, 0b11), is(5));
     }
 
     @Test

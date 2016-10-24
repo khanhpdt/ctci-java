@@ -192,18 +192,39 @@ class BitManipulationSolutions {
         return (n & (n - 1)) == 0;
     }
 
-    /**
-     * Problem 5.5
-     */
-    static int countNumberOfBitsToConvert(int a, int b) {
-        int xor = a ^ b;
-        // since xor contains 1 bit where the bits in a and b are different, we only need to count the bit 1 in xor.
-        int result = 0;
-        for (char bit : Integer.toBinaryString(xor).toCharArray()) {
-            if (bit == '1') result++;
-        }
-        return result;
-    }
+	/**
+	 * Problem 5.5
+	 * <p>This solution uses an bit manipulation to count number of bits.</p>
+	 */
+	static int countNumberOfBitsToConvert(int a, int b) {
+		int xor = a ^ b;
+		// since xor contains 1 bit where the bits in a and b are different, we only need to count the bit 1 in xor.
+		int result = 0;
+		while (xor != 0) {
+			if ((xor & 1) == 1) {
+				result++;
+			}
+			// uses shifting
+			xor = xor >>> 1;
+			// or we can also flip the processed least significant bits, but this needs a to keep track of the number of
+			// the processed bit.
+		}
+		return result;
+	}
+
+	/**
+	 * Problem 5.5
+	 * <p>This solution uses an additional array to count number of bits.</p>
+	 */
+	static int countNumberOfBitsToConvert_2(int a, int b) {
+		int xor = a ^ b;
+		// since xor contains 1 bit where the bits in a and b are different, we only need to count the bit 1 in xor.
+		int result = 0;
+		for (char bit : Integer.toBinaryString(xor).toCharArray()) {
+			if (bit == '1') result++;
+		}
+		return result;
+	}
 
     /**
      * Problem 5.6
