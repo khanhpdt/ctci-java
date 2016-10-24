@@ -15,9 +15,9 @@ class BitManipulationSolutions {
         // note: ((1 << i) - 1) produces a sequence of bits where the i lower-order bits are 1,
         // and the higher-order bits are 0
 
-        // clear all bits from j to 0
+        // keep all bits from MSB to (j + 1)
         int initN = N & (~ ((1 << (j + 1)) - 1));
-        // clear all bits from MSB to i
+        // keep all bits from i to 0
         int tailN = N & ((1 << (i + 1)) - 1);
         // shift M to the left i bits
         int shiftedM = M << i;
