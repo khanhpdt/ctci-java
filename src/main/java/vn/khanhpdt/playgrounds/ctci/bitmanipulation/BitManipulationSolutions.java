@@ -260,7 +260,7 @@ class BitManipulationSolutions {
     static int swapOddAndEvenBits(int n) {
         int oddBits = 0xaaaaaaaa & n;
         int evenBits = 0x55555555 & n;
-        return (oddBits >> 1) | (evenBits << 1);
+        return (oddBits >>> 1) | (evenBits << 1);
     }
 
     /**
