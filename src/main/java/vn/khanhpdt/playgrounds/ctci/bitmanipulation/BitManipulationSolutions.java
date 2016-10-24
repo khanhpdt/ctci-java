@@ -180,11 +180,16 @@ class BitManipulationSolutions {
     }
 
     /**
-     * Problem 5.4: Test what (n & (n - 1)) does.
+     * Problem 5.4: Explain what ((n & (n - 1)) == 0) indicates.
      */
-    static int problem54(int n) {
-        // n & (n - 1) clear the right most bit 1
-        return n & (n - 1);
+    static boolean problem54(int n) {
+        // n & (n - 1) flips the right most bit 1 and all the zeros following that bit.
+        // let say n1 is the part in n that is before the bit 1, then n = (n1)1(00...0) and (n - 1) = (n1)0(11...1).
+        // if (n & (n - 1) == 0), then (n1 & n1) == 0, meaning that n1 = 0. Thus, n = 1(00...0) and is a power of 2.
+        // so this test (n & (n - 1) == 0) can check if n is a power of 2.
+	    // and since n & (n - 1) == 0 if n = 0, this test can also check if n is 0.
+	    // so (n & (n - 1) == 0) checks if n is 0 or a power of 2.
+        return (n & (n - 1)) == 0;
     }
 
     /**

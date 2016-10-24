@@ -52,10 +52,10 @@ public class BitManipulationSolutionsTest {
 
     @Test
     public void testProblem54() throws Exception {
-        assertThat(BitManipulationSolutions.problem54(0b111011_1), is(0b111011_0));
-        assertThat(BitManipulationSolutions.problem54(0b11101_100), is(0b11101_000));
-        assertThat(BitManipulationSolutions.problem54(0b1_1000000), is(0b1_0000000));
-        assertThat(BitManipulationSolutions.problem54(0b1_000000), is(0));
+        assertThat(BitManipulationSolutions.problem54(0b100000000000), is(true));
+        assertThat(BitManipulationSolutions.problem54(0), is(true));
+        assertThat(BitManipulationSolutions.problem54(0b100000000000_1), is(false));
+        assertThat(BitManipulationSolutions.problem54(0b1_1_000000), is(false));
     }
 
     @Test
