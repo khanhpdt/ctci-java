@@ -3,6 +3,7 @@ package vn.khanhpdt.playgrounds.ctci.sortingandsearching;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -22,6 +23,21 @@ public class SortingAndSearchingSolutionsTest {
 
 		SortingAndSearchingSolutions.mergeSortedArrays(a, b);
 		assertTrue(Arrays.equals(a, new int[]{0, 1, 2, 3, 3, 4, 4, 5, 6, 7, 7, 8, 9, 10, 11, 12, 21, 25, 34, 100}));
+	}
+
+	@Test
+	public void testGroupAnagrams() {
+		List<String> s = Arrays.asList("1357", "2464", "123", "7531", "873193", "231", "6424");
+
+		List<String> result = SortingAndSearchingSolutions.clusterAnagrams(s);
+
+		assertTrue(nextToEachOther(result, "1357", "7531"));
+		assertTrue(nextToEachOther(result, "2464", "6424"));
+		assertTrue(nextToEachOther(result, "123", "231"));
+	}
+
+	private boolean nextToEachOther(List<String> strings, String s1, String s2) {
+		return Math.abs(strings.indexOf(s1) - strings.indexOf(s2)) == 1;
 	}
 
 }
