@@ -45,8 +45,17 @@ public class SortingAndSearchingSolutionsTest {
 	@Test
 	public void testFindInRotatedArray() {
 		int[] ints = new int[]{15, 16, 20, 25, 1, 3, 4, 5, 7, 10, 14};
-		int index = SortingAndSearchingSolutions.findInRotatedArray(ints, 5);
-		assertThat(index, is(7));
+		assertThat(SortingAndSearchingSolutions.findInRotatedArray(ints, 5), is(7));
+		assertThat(SortingAndSearchingSolutions.findInRotatedArray(ints, 15), is(0));
+		assertThat(SortingAndSearchingSolutions.findInRotatedArray(ints, 14), is(10));
+	}
+
+	@Test
+	public void testFindInInterspersedArray() {
+		String[] strings = new String[]{"at", "", "", "", "ball", "", "", "car", "", "", "dad", "", ""};
+		assertThat(SortingAndSearchingSolutions.findInInterspersedArray(strings, "at"), is(0));
+		assertThat(SortingAndSearchingSolutions.findInInterspersedArray(strings, "ball"), is(4));
+		assertThat(SortingAndSearchingSolutions.findInInterspersedArray(strings, "dad"), is(10));
 	}
 
 }

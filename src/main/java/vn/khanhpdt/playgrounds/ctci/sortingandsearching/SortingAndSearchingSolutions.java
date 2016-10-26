@@ -155,7 +155,7 @@ class SortingAndSearchingSolutions {
 	}
 
 	private static int binarySearch(int n, int[] numbers, int from, int to) {
-		while (from < to) {
+		while (from <= to) {
 			int middle = (from + to) / 2;
 			if (n == numbers[middle]) {
 				return middle;
@@ -170,4 +170,48 @@ class SortingAndSearchingSolutions {
 		throw new IllegalArgumentException(n + " not found.");
 	}
 
+	/**
+	 * Problem 11.5
+	 *
+	 * @param strings a sorted string array interspersed with empty strings
+	 */
+	static int findInInterspersedArray(String[] strings, String s) {
+		int from = 0;
+		int to = strings.length - 1;
+		while (from <= to) {
+			final int middle = (from + to) / 2;
+
+			// move up until a non-empty string found
+			int nonEmptyStringMiddle = middle;
+			while ("".equals(strings[nonEmptyStringMiddle]) && nonEmptyStringMiddle <= to) {
+				nonEmptyStringMiddle++;
+			}
+
+			// no non-empty string found upward
+			if (nonEmptyStringMiddle > to) {
+				// move down until a non-empty string found
+				nonEmptyStringMiddle = middle - 1;
+				while ("".equals(strings[nonEmptyStringMiddle]) && nonEmptyStringMiddle >= from) {
+					nonEmptyStringMiddle--;
+				}
+			}
+
+			// no non-empty string found downward
+			if (nonEmptyStringMiddle < from) {
+				throw new IllegalArgumentException("All strings empty.");
+			}
+
+			// binary search
+			if (s.equals(strings[nonEmptyStringMiddle])) {
+				return nonEmptyStringMiddle;
+			}
+			if (s.compareTo(strings[nonEmptyStringMiddle]) > 0) {
+				from = nonEmptyStringMiddle + 1;
+			} else {
+				to = nonEmptyStringMiddle - 1;
+			}
+		}
+
+		throw new IllegalArgumentException(s + " not found.");
+	}
 }
