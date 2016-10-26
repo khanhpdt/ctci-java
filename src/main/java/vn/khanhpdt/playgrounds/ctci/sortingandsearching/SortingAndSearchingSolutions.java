@@ -214,4 +214,51 @@ class SortingAndSearchingSolutions {
 
 		throw new IllegalArgumentException(s + " not found.");
 	}
+
+	static int[] findInSortedMatrix(int[][] matrix, int n) {
+		return findInSortedMatrix(n, matrix, 0, matrix.length - 1, 0, matrix[0].length - 1);
+	}
+
+	private static int[] findInSortedMatrix(int n, int[][] matrix, int rowFrom, int rowTo, int colFrom, int colTo) {
+		if (rowFrom > rowTo || colFrom > colTo) {
+			// not found
+			return null;
+		}
+
+		int middleRow = (rowFrom + rowTo) / 2;
+		int middleCol = (colFrom + colTo) / 2;
+
+		if (n == matrix[middleRow][middleCol]) {
+			return new int[]{middleRow, middleCol};
+		}
+
+		int[] indexes;
+		if (n > matrix[middleRow][middleCol]) {
+			// right
+			indexes = findInSortedMatrix(n, matrix, middleRow, middleRow, middleCol + 1, colTo);
+			if (indexes == null) {
+				// lower right
+				indexes = findInSortedMatrix(n, matrix, middleRow + 1, rowTo, middleCol, colTo);
+			}
+		} else {
+			// left
+			indexes = findInSortedMatrix(n, matrix, middleRow, middleRow, colFrom, middleCol - 1);
+			if (indexes == null) {
+				// upper left
+				indexes = findInSortedMatrix(n, matrix, rowFrom, middleRow - 1, colFrom, middleCol);
+			}
+		}
+		// search in these areas in both cases (less and greater than), because we cannot know know their relationships
+		// with matrix[middleRow][middleCol]
+		if (indexes == null) {
+			// upper right
+			indexes = findInSortedMatrix(n, matrix, rowFrom, middleRow - 1, middleCol + 1, colTo);
+			if (indexes == null) {
+				// lower left
+				indexes = findInSortedMatrix(n, matrix, middleRow + 1, rowTo, colFrom, middleCol - 1);
+			}
+		}
+
+		return indexes;
+	}
 }

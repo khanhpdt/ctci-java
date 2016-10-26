@@ -58,4 +58,13 @@ public class SortingAndSearchingSolutionsTest {
 		assertThat(SortingAndSearchingSolutions.findInInterspersedArray(strings, "dad"), is(10));
 	}
 
+	@Test
+	public void testFindInSortedMatrix() throws Exception {
+		int[][] matrix = new int[][]{new int[]{1, 10, 18}, new int[]{2, 11, 21}, new int[]{5, 31, 45}};
+
+		assertTrue(Arrays.equals(SortingAndSearchingSolutions.findInSortedMatrix(matrix, 1), new int[]{0, 0}));
+		assertTrue(Arrays.equals(SortingAndSearchingSolutions.findInSortedMatrix(matrix, 45), new int[]{2, 2}));
+		assertTrue(Arrays.equals(SortingAndSearchingSolutions.findInSortedMatrix(matrix, 31), new int[]{2, 1}));
+		assertTrue(Arrays.equals(SortingAndSearchingSolutions.findInSortedMatrix(matrix, 5), new int[]{2, 0}));
+	}
 }
