@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -38,6 +40,13 @@ public class SortingAndSearchingSolutionsTest {
 
 	private boolean nextToEachOther(List<String> strings, String s1, String s2) {
 		return Math.abs(strings.indexOf(s1) - strings.indexOf(s2)) == 1;
+	}
+
+	@Test
+	public void testFindInRotatedArray() {
+		int[] ints = new int[]{15, 16, 20, 25, 1, 3, 4, 5, 7, 10, 14};
+		int index = SortingAndSearchingSolutions.findInRotatedArray(ints, 5);
+		assertThat(index, is(7));
 	}
 
 }

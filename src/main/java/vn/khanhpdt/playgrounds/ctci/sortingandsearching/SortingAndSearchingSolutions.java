@@ -119,4 +119,55 @@ class SortingAndSearchingSolutions {
 		}
 		return result;
 	}
+
+	/**
+	 * Problem 11.3
+	 *
+	 * @param numbers a rotated of a sorted array
+	 */
+	static int findInRotatedArray(int[] numbers, int n) {
+		int indexSmallest = -1;
+		int i = 0;
+		while (indexSmallest == -1 && i < numbers.length - 1) {
+			// micro optimization: exploit the search for the smallest number to find the given number
+			if (numbers[i] == n) {
+				return i;
+			}
+
+			if (numbers[i] > numbers[i + 1]) {
+				indexSmallest = i + 1;
+			}
+
+			i++;
+		}
+
+		// because indexSmallest == -1 here means no rotation, meaning that the given number must have been found
+		// in the loop if it is in the array.
+		if (indexSmallest == -1) {
+			throw new IllegalArgumentException(n + " not found.");
+		}
+
+		if (n > numbers[0]) {
+			return binarySearch(n, numbers, 0, indexSmallest - 1);
+		} else {
+			return binarySearch(n, numbers, indexSmallest, numbers.length - 1);
+		}
+	}
+
+	private static int binarySearch(int n, int[] numbers, int from, int to) {
+		while (from < to) {
+			int middle = (from + to) / 2;
+			if (n == numbers[middle]) {
+				return middle;
+			}
+			if (n > numbers[middle]) {
+				from = middle + 1;
+			} else {
+				to = middle - 1;
+			}
+		}
+
+		throw new IllegalArgumentException(n + " not found.");
+	}
+
 }
