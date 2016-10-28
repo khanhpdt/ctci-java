@@ -67,4 +67,20 @@ public class SortingAndSearchingSolutionsTest {
 		assertTrue(Arrays.equals(SortingAndSearchingSolutions.findInSortedMatrix(matrix, 31), new int[]{2, 1}));
 		assertTrue(Arrays.equals(SortingAndSearchingSolutions.findInSortedMatrix(matrix, 5), new int[]{2, 0}));
 	}
+
+	@Test
+	public void testCircusTowerMaxSize_1() {
+		int[][] people = new int[][]{new int[]{65, 100}, new int[]{70, 150}, new int[]{56, 90}, new int[]{75, 190},
+				new int[]{60, 95}, new int[]{68, 110}};
+
+		assertThat(SortingAndSearchingSolutions.circusTowerMaxSize(people), is(6));
+	}
+
+	@Test
+	public void testCircusTowerMaxSize_2() {
+		int[][] people = new int[][]{new int[]{65, 100}, new int[]{70, 120}, new int[]{56, 120}, new int[]{75, 140},
+				new int[]{60, 90}, new int[]{68, 80}};
+
+		assertThat(SortingAndSearchingSolutions.circusTowerMaxSize(people), is(4));
+	}
 }

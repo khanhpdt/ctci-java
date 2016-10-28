@@ -215,6 +215,11 @@ class SortingAndSearchingSolutions {
 		throw new IllegalArgumentException(s + " not found.");
 	}
 
+	/**
+	 * Problem 11.6
+	 *
+	 * @param matrix a matrix whose columns and rows are sorted in ascending order
+	 */
 	static int[] findInSortedMatrix(int[][] matrix, int n) {
 		return findInSortedMatrix(n, matrix, 0, matrix.length - 1, 0, matrix[0].length - 1);
 	}
@@ -260,5 +265,32 @@ class SortingAndSearchingSolutions {
 		}
 
 		return indexes;
+	}
+
+	/**
+	 * Problem 11.7
+	 */
+	static int circusTowerMaxSize(int[][] people) {
+		sortByHeight(people);
+		return lengthLongestWeightSequenceInOrder(people);
+	}
+
+	private static int lengthLongestWeightSequenceInOrder(int[][] people) {
+		int longest = 0;
+		for (int i = 0; i < people.length - 1; i++) {
+			int thisWeight = people[i][1];
+			int length = 1;
+			for (int j = i + 1; j < people.length; j++) {
+				int otherWeight = people[j][1];
+				if (thisWeight < otherWeight) length++;
+			}
+			if (length > longest) longest = length;
+		}
+		return longest;
+	}
+
+	private static void sortByHeight(int[][] people) {
+		List<int[]> peopleList = Arrays.asList(people);
+		Collections.sort(peopleList, (p1, p2) -> p1[0] - p2[0]);
 	}
 }
