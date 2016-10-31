@@ -155,6 +155,25 @@ class SortingAndSearchingSolutions {
 	}
 
 	/**
+	 * Problem 11.2
+	 * <p>Solution 2: Use sorted anagram as a key.</p>
+	 */
+	static List<List<String>> clusterAnagrams_2(List<String> strings) {
+		Map<String, List<String>> anagrams = new HashMap<>();
+		strings.forEach(s -> {
+			char[] sortedChars = s.toCharArray();
+			Arrays.sort(sortedChars);
+
+			String key = String.valueOf(sortedChars);
+			anagrams.putIfAbsent(key, new ArrayList<>());
+			anagrams.get(key).add(s);
+		});
+
+		return new ArrayList<>(anagrams.values());
+	}
+
+
+	/**
 	 * Problem 11.3
 	 *
 	 * @param numbers a rotated of a sorted array

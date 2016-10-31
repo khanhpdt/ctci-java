@@ -55,6 +55,19 @@ public class SortingAndSearchingSolutionsTest {
 	}
 
 	@Test
+	public void testGroupAnagrams2() {
+		List<String> s = Arrays.asList("1357", "2464", "123", "7531", "873193", "231", "6424", "2664");
+
+		List<List<String>> result = SortingAndSearchingSolutions.clusterAnagrams_2(s);
+
+		assertThat(result, Matchers.hasItem(Matchers.containsInAnyOrder("1357", "7531")));
+		assertThat(result, Matchers.hasItem(Matchers.containsInAnyOrder("2464", "6424")));
+		assertThat(result, Matchers.hasItem(Matchers.containsInAnyOrder("123", "231")));
+		assertThat(result, Matchers.hasItem(Matchers.containsInAnyOrder("873193")));
+		assertThat(result, Matchers.hasItem(Matchers.containsInAnyOrder("2664")));
+	}
+
+	@Test
 	public void testFindInRotatedArray() {
 		int[] ints = new int[]{15, 16, 20, 25, 1, 3, 4, 5, 7, 10, 14};
 		assertThat(SortingAndSearchingSolutions.findInRotatedArray(ints, 5), is(7));
