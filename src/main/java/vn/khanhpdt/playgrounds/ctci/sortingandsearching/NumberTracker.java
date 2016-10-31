@@ -15,6 +15,7 @@ class NumberTracker {
 	 * numbers.</p>
 	 * <p>If ranking has higher priority than tracking, this map should be used to store the rank of each number.
 	 * Then tracking takes O(n), whereas ranking takes O(1).</p>
+	 * <p>We can also use binary search tree to store the generated numbers, then both tracking and ranking needs O(logn).</p>
 	 *
 	 */
 	private Map<Integer, Integer> numberCounts = new HashMap<>();
