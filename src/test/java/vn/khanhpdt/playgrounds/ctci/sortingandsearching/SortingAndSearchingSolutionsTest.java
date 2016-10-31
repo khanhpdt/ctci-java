@@ -1,5 +1,6 @@
 package vn.khanhpdt.playgrounds.ctci.sortingandsearching;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -42,17 +43,15 @@ public class SortingAndSearchingSolutionsTest {
 
 	@Test
 	public void testGroupAnagrams() {
-		List<String> s = Arrays.asList("1357", "2464", "123", "7531", "873193", "231", "6424");
+		List<String> s = Arrays.asList("1357", "2464", "123", "7531", "873193", "231", "6424", "2664");
 
-		List<String> result = SortingAndSearchingSolutions.clusterAnagrams(s);
+		List<List<String>> result = SortingAndSearchingSolutions.clusterAnagrams(s);
 
-		assertTrue(nextToEachOther(result, "1357", "7531"));
-		assertTrue(nextToEachOther(result, "2464", "6424"));
-		assertTrue(nextToEachOther(result, "123", "231"));
-	}
-
-	private boolean nextToEachOther(List<String> strings, String s1, String s2) {
-		return Math.abs(strings.indexOf(s1) - strings.indexOf(s2)) == 1;
+		assertThat(result, Matchers.hasItem(Matchers.containsInAnyOrder("1357", "7531")));
+		assertThat(result, Matchers.hasItem(Matchers.containsInAnyOrder("2464", "6424")));
+		assertThat(result, Matchers.hasItem(Matchers.containsInAnyOrder("123", "231")));
+		assertThat(result, Matchers.hasItem(Matchers.containsInAnyOrder("873193")));
+		assertThat(result, Matchers.hasItem(Matchers.containsInAnyOrder("2664")));
 	}
 
 	@Test

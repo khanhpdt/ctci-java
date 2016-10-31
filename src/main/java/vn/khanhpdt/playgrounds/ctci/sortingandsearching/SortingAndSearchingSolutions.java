@@ -76,7 +76,7 @@ class SortingAndSearchingSolutions {
 	/**
 	 * Problem 11.2
 	 */
-	static List<String> clusterAnagrams(List<String> strings) {
+	static List<List<String>> clusterAnagrams(List<String> strings) {
 		Map<Integer, List<String>> stringBySumCharacters = new HashMap<>();
 		strings.forEach(s -> {
 			int sum = calculateSumCharacters(s);
@@ -84,7 +84,7 @@ class SortingAndSearchingSolutions {
 			stringBySumCharacters.get(sum).add(s);
 		});
 
-		List<String> result = new ArrayList<>();
+		List<List<String>> result = new ArrayList<>();
 		for (List<String> stringList : stringBySumCharacters.values()) {
 			result.addAll(groupAnagrams(stringList));
 		}
@@ -92,29 +92,31 @@ class SortingAndSearchingSolutions {
 		return result;
 	}
 
-	private static List<String> groupAnagrams(List<String> strings) {
-		final int nStrings = strings.size();
+	private static List<List<String>> groupAnagrams(List<String> strings) {
+		List<List<String>> result = new ArrayList<>();
+		int nStringsLeft = strings.size();
+		while (nStringsLeft > 0) {
+			result.add(new ArrayList<>());
+			List<String> currentSet = result.get(result.size() - 1);
 
-		List<String> result = new ArrayList<>();
-		result.add(strings.get(0));
-		strings.set(0, null);
-
-		while (result.size() < nStrings) {
-			String current = result.get(result.size() - 1);
-
-			// move all anagrams
+			// get a string to find its anagrams
 			for (int i = 0; i < strings.size(); i++) {
-				if (strings.get(i) != null && isAnagram(current, strings.get(i))) {
-					result.add(strings.get(i));
+				if (strings.get(i) != null) {
+					currentSet.add(strings.get(i));
 					strings.set(i, null);
+					nStringsLeft--;
+					break;
 				}
 			}
 
-			// continue with another string
+			String currentString = currentSet.get(0);
+
+			// move all anagrams to be next to each other
 			for (int i = 0; i < strings.size(); i++) {
-				if (strings.get(i) != null) {
-					result.add(strings.get(i));
+				if (strings.get(i) != null && isAnagram(currentString, strings.get(i))) {
+					currentSet.add(strings.get(i));
 					strings.set(i, null);
+					nStringsLeft--;
 				}
 			}
 		}
@@ -127,14 +129,17 @@ class SortingAndSearchingSolutions {
 			return false;
 		}
 
-		Set<Character> chars = new HashSet<>();
+		Map<Character, Integer> charCounts = new HashMap<>();
 		for (char c : s1.toCharArray()) {
-			chars.add(c);
+			charCounts.putIfAbsent(c, 0);
+			charCounts.replace(c, charCounts.get(c) + 1);
 		}
 
 		for (char c : s2.toCharArray()) {
-			if (!chars.contains(c)) {
+			if (!charCounts.containsKey(c) || charCounts.get(c) == 0) {
 				return false;
+			} else {
+				charCounts.replace(c, charCounts.get(c) - 1);
 			}
 		}
 
