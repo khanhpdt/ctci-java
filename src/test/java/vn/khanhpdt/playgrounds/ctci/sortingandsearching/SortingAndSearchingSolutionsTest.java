@@ -28,6 +28,19 @@ public class SortingAndSearchingSolutionsTest {
 	}
 
 	@Test
+	public void testMergeSortedArrays2() {
+		int[] a = new int[20];
+		for (int i = 0; i < 13; i++) {
+			a[i] = i;
+		}
+
+		int[] b = new int[]{3, 4, 7, 21, 25, 34, 100};
+
+		SortingAndSearchingSolutions.mergeSortedArrays_2(a, b);
+		assertTrue(Arrays.equals(a, new int[]{0, 1, 2, 3, 3, 4, 4, 5, 6, 7, 7, 8, 9, 10, 11, 12, 21, 25, 34, 100}));
+	}
+
+	@Test
 	public void testGroupAnagrams() {
 		List<String> s = Arrays.asList("1357", "2464", "123", "7531", "873193", "231", "6424");
 

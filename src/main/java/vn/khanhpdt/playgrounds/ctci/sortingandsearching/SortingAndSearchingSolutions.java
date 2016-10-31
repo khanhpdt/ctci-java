@@ -45,6 +45,35 @@ class SortingAndSearchingSolutions {
 	}
 
 	/**
+	 * Problem 11.1
+	 * <p>Solution 2: Merge two arrays from their backs, so that we don't need to shift the elements in a.</p>
+	 */
+	static void mergeSortedArrays_2(int[] a, int[] b) {
+		final int nElementsA = a.length - b.length;
+		final int nElementsB = b.length;
+
+		int i = nElementsA - 1, j = nElementsB - 1, k = a.length - 1;
+		while (i >= 0 && j >= 0) {
+			// put larger numbers at the end of the array
+			if (a[i] > b[j]) {
+				a[k] = a[i];
+				i--;
+			} else {
+				a[k] = b[j];
+				j--;
+			}
+
+			k--;
+		}
+
+		// in case all elements in a are merged but some of b are not
+		while (j >= 0) {
+			a[k] = b[j];
+			j--;
+		}
+	}
+
+	/**
 	 * Problem 11.2
 	 */
 	static List<String> clusterAnagrams(List<String> strings) {
