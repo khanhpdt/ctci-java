@@ -239,7 +239,6 @@ class SortingAndSearchingSolutions {
 			while ("".equals(strings[nonEmptyStringMiddle]) && nonEmptyStringMiddle <= to) {
 				nonEmptyStringMiddle++;
 			}
-
 			// no non-empty string found upward
 			if (nonEmptyStringMiddle > to) {
 				// move down until a non-empty string found
@@ -248,6 +247,8 @@ class SortingAndSearchingSolutions {
 					nonEmptyStringMiddle--;
 				}
 			}
+			// NOTE: we can also move into the two directions at the same time to avoid the bad case when the non-empty
+			// string is not in the upward but in the downward direction
 
 			// no non-empty string found downward
 			if (nonEmptyStringMiddle < from) {
