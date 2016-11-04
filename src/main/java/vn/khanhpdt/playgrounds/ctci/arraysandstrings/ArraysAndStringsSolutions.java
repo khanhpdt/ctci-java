@@ -60,9 +60,9 @@ public class ArraysAndStringsSolutions {
 			throw new IllegalArgumentException("This algorithm only supports string with characters in range [a-z].");
 		}
 
+		// this limits this algorithm to apply only on [a-z] characters, because an integer has only 32 bits
 		int bitVector = 0;
 		for (int i = 0; i < s.length(); i++) {
-			// this limits this algorithm to apply only on [a-z] characters
 			int offset = s.charAt(i) - 'a';
 			// the bit at the position offset is already on -> the character was found before
 			if (((bitVector << offset) & (1 << offset)) == 1) {
@@ -79,16 +79,38 @@ public class ArraysAndStringsSolutions {
 	/**
 	 * Problem 1.2.
 	 *
-	 * <p>Complexity: O(n), where n = length of the string</p>
+	 * <p>Time: O(n), where n = length of the string</p>
+	 * <p>Memory: O(n)</p>
 	 */
-	public static String reverseString(String s) {
-		char[] reversed = new char[s.length()];
-		int j = s.length() - 1;
-		for (int i = 0; i < s.length(); i++) {
-			reversed[j] = s.charAt(i);
+	static char[] reverseString(char[] chars) {
+		char[] reversed = new char[chars.length];
+		int j = chars.length - 1;
+		for (char ch : chars) {
+			reversed[j] = ch;
 			j--;
 		}
-		return String.valueOf(reversed);
+		return reversed;
+	}
+
+	/**
+	 * Problem 1.2.
+	 *
+	 * <p>In-place solution</p>
+	 * <p>Time: O(n), where n = length of the string</p>
+	 * <p>Memory: O(1)</p>
+	 */
+	static char[] reverseString_2(char[] chars) {
+		int i = 0;
+		int j = chars.length - 1;
+		while (i < j) {
+			char c = chars[i];
+			chars[i] = chars[j];
+			chars[j] = c;
+
+			i++;
+			j--;
+		}
+		return chars;
 	}
 
 	/**

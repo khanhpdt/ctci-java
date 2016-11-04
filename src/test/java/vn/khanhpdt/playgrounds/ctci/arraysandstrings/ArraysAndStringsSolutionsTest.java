@@ -1,6 +1,5 @@
 package vn.khanhpdt.playgrounds.ctci.arraysandstrings;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.collection.IsArray;
 import org.junit.Test;
 
@@ -34,10 +33,18 @@ public class ArraysAndStringsSolutionsTest {
 	public void testReverseString() throws Exception {
 		String s = "reverse this string";
 
-		String reversed = ArraysAndStringsSolutions.reverseString(s);
+		char[] reversed = ArraysAndStringsSolutions.reverseString(s.toCharArray());
 
-		assertThat(reversed, is("gnirts siht esrever"));
-		assertThat(reversed, is(StringUtils.reverse(s)));
+		assertThat(String.valueOf(reversed), is("gnirts siht esrever"));
+	}
+
+	@Test
+	public void testReverseString_2() throws Exception {
+		String s = "reverse this string";
+
+		char[] reversed = ArraysAndStringsSolutions.reverseString_2(s.toCharArray());
+
+		assertThat(String.valueOf(reversed), is("gnirts siht esrever"));
 	}
 
 	@Test
