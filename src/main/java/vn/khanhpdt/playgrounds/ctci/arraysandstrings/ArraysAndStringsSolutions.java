@@ -286,7 +286,8 @@ class ArraysAndStringsSolutions {
 	/**
 	 * Problem 1.7.
 	 *
-	 * <p>Complexity: O(m*n*(m+n)), where m and n are the number of rows and columns of the given matrix.</p>
+	 * <p>Time: O(m*n*(m+n)), where m and n are the number of rows and columns of the given matrix.</p>
+	 * <p>Memory: O(m*n)</p>
 	 */
 	static Integer[][] setZeros(Integer[][] matrix) {
 		int nRows = matrix.length;
@@ -315,6 +316,39 @@ class ArraysAndStringsSolutions {
 		}
 
 		return result;
+	}
+
+	/**
+	 * Problem 1.7.
+	 *
+	 * <p>Time: O(m*n*(m+n)), where m and n are the number of rows and columns of the given matrix.</p>
+	 * <p>Memory: O(m + n)</p>
+	 */
+	static Integer[][] setZeros_2(Integer[][] matrix) {
+		int nRows = matrix.length;
+		int nCols = matrix[0].length;
+
+		boolean[] rowsToZero = new boolean[nRows];
+		boolean[] colsToZero = new boolean[nCols];
+
+		for (int i = 0; i < nRows; i++) {
+			for (int j = 0; j < nCols; j++) {
+				if (matrix[i][j] == 0) {
+					rowsToZero[i] = true;
+					colsToZero[i] = true;
+				}
+			}
+		}
+
+		for (int i = 0; i < nRows; i++) {
+			for (int j = 0; j < nCols; j++) {
+				if (rowsToZero[i] || colsToZero[j]) {
+					matrix[i][j] = 0;
+				}
+			}
+		}
+
+		return matrix;
 	}
 
 	/**

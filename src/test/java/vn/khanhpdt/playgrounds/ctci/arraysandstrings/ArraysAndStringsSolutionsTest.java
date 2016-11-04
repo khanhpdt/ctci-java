@@ -186,6 +186,17 @@ public class ArraysAndStringsSolutionsTest {
 	}
 
 	@Test
+	public void testSetZeros2_1() {
+		Integer[][] matrix = {{1, 0, 0, 4}, {0, 6, 7, 8}, {9, 10, 11, 0}};
+
+		Integer[][] result = ArraysAndStringsSolutions.setZeros_2(matrix);
+
+		assertThat(result[0], IsArray.array(is(0), is(0), is(0), is(0)));
+		assertThat(result[1], IsArray.array(is(0), is(0), is(0), is(0)));
+		assertThat(result[2], IsArray.array(is(0), is(0), is(0), is(0)));
+	}
+
+	@Test
 	public void testCheckRotation_1() {
 		String s1 = "erbottlewat";
 		String s2 = "waterbottle";
