@@ -226,8 +226,8 @@ class ArraysAndStringsSolutions {
 	/**
 	 * Problem 1.6.
 	 *
-	 * <p>Complexity: O(m*n), where m and n are the number of rows and columns of the given matrix.</p>
-	 * <p>Extra O(n) memory</p>
+	 * <p>Time: O(m*n), where m and n are the number of rows and columns of the given matrix.</p>
+	 * <p>Memory: O(m*n)</p>
 	 */
 	static Integer[][] rotateRight_1(Integer[][] matrix) {
 		int nRows = matrix.length;
@@ -251,8 +251,8 @@ class ArraysAndStringsSolutions {
 	/**
 	 * Problem 1.6.
 	 *
-	 * <p>Complexity: O(m*n), where m and n are the number of rows and columns of the given matrix.</p>
 	 * <p>In-place rotation.</p>
+	 * <p>Time: O(m*n), where m and n are the number of rows and columns of the given matrix.</p>
 	 */
 	static void rotateRight_2(Integer[][] matrix) {
 		int nRows = matrix.length;
