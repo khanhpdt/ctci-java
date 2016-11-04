@@ -81,6 +81,15 @@ public class ArraysAndStringsSolutionsTest {
 	}
 
 	@Test
+	public void testReplaceSpaces_2() throws Exception {
+		String s = "Mr John Smith    ";
+
+		char[] result = ArraysAndStringsSolutions.replaceSpaces_2(s.toCharArray(), 13);
+
+		assertThat(String.valueOf(result), is("Mr%20John%20Smith"));
+	}
+
+	@Test
 	public void testCompressString_1() throws Exception {
 		String s = "aabcccccaaa";
 

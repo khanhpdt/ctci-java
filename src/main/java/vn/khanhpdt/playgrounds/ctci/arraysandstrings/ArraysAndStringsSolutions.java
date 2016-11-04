@@ -10,14 +10,14 @@ import java.util.regex.Pattern;
 /**
  * @author khanhpdt
  */
-public class ArraysAndStringsSolutions {
+class ArraysAndStringsSolutions {
 
 	/**
 	 * <p>Problem 1.1</p>
 	 * <p>Solution 1: a straightforward solution</p>
 	 * <p>Complexity: O(n^2), where n = length of the string</p>
 	 */
-	public static boolean hasUniqueCharacters_1(String s) {
+	static boolean hasUniqueCharacters_1(String s) {
 		for (int i = 0; i < s.length() - 1; i++) {
 			char c = s.charAt(i);
 			for (int j = i + 1; j < s.length(); j++) {
@@ -36,7 +36,7 @@ public class ArraysAndStringsSolutions {
 	 * <p>Complexity: O(n), where n = length of the string</p>
 	 * <p>Extra O(n) memory</p>
 	 */
-	public static boolean hasUniqueCharacters_2(String s) {
+	static boolean hasUniqueCharacters_2(String s) {
 		// O(n) memory needed
 		Set<Character> characters = new HashSet<>();
 		for (int i = 0; i < s.length(); i++) {
@@ -53,7 +53,7 @@ public class ArraysAndStringsSolutions {
 	 * <p>Solution 3: use a bit vector</p>
 	 * <p>Complexity: O(n), where n = length of the given string</p>
 	 */
-	public static boolean hasUniqueCharacters_3(String s) {
+	static boolean hasUniqueCharacters_3(String s) {
 		Pattern pattern = Pattern.compile("^[a-z]+$");
 		Matcher matcher = pattern.matcher(s);
 		if (!matcher.find()) {
@@ -118,7 +118,7 @@ public class ArraysAndStringsSolutions {
 	 *
 	 * <p>Complexity: O(n), where n = length of the strings</p>
 	 */
-	public static boolean checkPermutation(String s1, String s2) {
+	static boolean checkPermutation(String s1, String s2) {
 		if (s1.length() != s2.length()) {
 			return false;
 		}
@@ -153,10 +153,10 @@ public class ArraysAndStringsSolutions {
 	/**
 	 * Problem 1.4.
 	 *
-	 * <p>Complexity: O(n^2) in the worst case, where n = length of the strings.
-	 * The main computation is the shifting of the array elements.</p>
+	 * <p>Time: O(n^2) in the worst case, where n = length of the strings. The main computation is the shifting of the
+	 * array elements.</p>
 	 */
-	public static String replaceSpaces(String s) {
+	static String replaceSpaces(String s) {
 		char[] chars = s.toCharArray();
 
 		for (int i = 0; i < chars.length; i++) {
@@ -182,11 +182,30 @@ public class ArraysAndStringsSolutions {
 	}
 
 	/**
+	 * Problem 1.4.
+	 *
+	 * <p>Time: O(n) in the worst case, where n = length of the strings.</p>
+	 */
+	static char[] replaceSpaces_2(char[] chars, int size) {
+		int j = chars.length - 1;
+		for (int i = size - 1; i >= 0; i--) {
+			if (chars[i] == ' ') {
+				chars[j--] = '0';
+				chars[j--] = '2';
+				chars[j--] = '%';
+			} else {
+				chars[j--] = chars[i];
+			}
+		}
+		return chars;
+	}
+
+	/**
 	 * Problem 1.5.
 	 *
 	 * <p>Complexity: O(n), where n = length of the given string</p>
 	 */
-	public static String compress(String s) {
+	static String compress(String s) {
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < s.length(); i++) {
 			char ch = s.charAt(i);
@@ -209,7 +228,7 @@ public class ArraysAndStringsSolutions {
 	 * <p>Complexity: O(m*n), where m and n are the number of rows and columns of the given matrix.</p>
 	 * <p>Extra O(n) memory</p>
 	 */
-	public static Integer[][] rotateRight_1(Integer[][] matrix) {
+	static Integer[][] rotateRight_1(Integer[][] matrix) {
 		int nRows = matrix.length;
 		int nCols = matrix[0].length;
 
@@ -234,7 +253,7 @@ public class ArraysAndStringsSolutions {
 	 * <p>Complexity: O(m*n), where m and n are the number of rows and columns of the given matrix.</p>
 	 * <p>In-place rotation.</p>
 	 */
-	public static void rotateRight_2(Integer[][] matrix) {
+	static void rotateRight_2(Integer[][] matrix) {
 		int nRows = matrix.length;
 		int nCols = matrix[0].length;
 		
@@ -268,7 +287,7 @@ public class ArraysAndStringsSolutions {
 	 *
 	 * <p>Complexity: O(m*n*(m+n)), where m and n are the number of rows and columns of the given matrix.</p>
 	 */
-	public static Integer[][] setZeros(Integer[][] matrix) {
+	static Integer[][] setZeros(Integer[][] matrix) {
 		int nRows = matrix.length;
 		int nCols = matrix[0].length;
 
@@ -302,7 +321,7 @@ public class ArraysAndStringsSolutions {
 	 * 
 	 * <p>Complexity: O(n), where n = length of the two strings</p>
 	 */
-	public static boolean checkRotation(String s1, String s2) {
+	static boolean checkRotation(String s1, String s2) {
 		if (s1.length() != s2.length()) {
 			return false;
 		}
