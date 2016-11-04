@@ -203,7 +203,8 @@ class ArraysAndStringsSolutions {
 	/**
 	 * Problem 1.5.
 	 *
-	 * <p>Complexity: O(n), where n = length of the given string</p>
+	 * <p>Time: O(n), where n = length of the given string</p>
+	 * <p>Memory: O(n)</p>
 	 */
 	static String compress(String s) {
 		StringBuilder builder = new StringBuilder();
