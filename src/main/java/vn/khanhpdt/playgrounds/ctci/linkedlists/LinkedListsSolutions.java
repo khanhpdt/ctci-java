@@ -17,7 +17,8 @@ class LinkedListsSolutions {
 	/**
 	 * <p>Problem 2.1</p>
 	 * <p>Solution 1: two pointers</p>
-	 * <p>Worst-case complexity: O(n^2), where n is the length of the list.</p>
+	 * <p>Time: O(n^2), where n is the length of the list.</p>
+	 * <p>Memory: O(1)</p>
 	 */
 	static void removeDuplicates(SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> list) {
 		SinglyLinkedNode<UUID, Integer> current = list.getHead();
@@ -40,8 +41,8 @@ class LinkedListsSolutions {
 	/**
 	 * <p>Problem 2.1</p>
 	 * <p>Solution 2: use a hash table</p>
-	 * <p>Worst-case complexity: O(n), where n is the length of the given list.</p>
-	 * <p>Needs extra memory for the set.</p>
+	 * <p>Time: O(n), where n is the length of the given list.</p>
+	 * <p>Memory: O(n)</p>
 	 */
 	static void removeDuplicates_2(SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> list) {
 		// This set contains distinct list items.
