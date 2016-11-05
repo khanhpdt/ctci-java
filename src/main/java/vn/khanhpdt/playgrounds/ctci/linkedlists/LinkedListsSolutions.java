@@ -133,7 +133,7 @@ class LinkedListsSolutions {
 
 	/**
 	 * Problem 2.4.
-	 * <p>Worst-case complexity: O(n), where n is the length of the given list. The worst case happens when all the
+	 * <p>Time: O(n), where n is the length of the given list. The worst case happens when all the
 	 * items in the list are smaller than the given partitioning value, because in that case we have to move all the
 	 * items to the head of the list.</p>
 	 */
