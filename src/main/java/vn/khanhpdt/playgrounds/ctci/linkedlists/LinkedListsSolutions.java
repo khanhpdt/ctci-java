@@ -116,19 +116,18 @@ class LinkedListsSolutions {
 
 	/**
 	 * Problem 2.3.
-	 * <p>Worst-case complexity: O(1)</p>
+	 * <p>Time: O(1)</p>
 	 */
 	static void removeMiddleItem(SinglyLinkedNode<UUID, Integer> removedItem) {
 		SinglyLinkedNode<UUID, Integer> nextItem = removedItem.getNext();
 
-		// this remove method should only apply to the middle items
+		// this remove method cannot be applied to the last item.
 		assert nextItem != null;
 
-		// fake the removed item as its next item -> the current item now acts like its next item
+		// fake the removed item as its next item. the current item now acts like its next item.
 		removedItem.cloneContent(nextItem);
-		nextItem.removeContent();
 
-		// cut the next item out from the list
+		// cut the already-faked next item out from the list
 		removedItem.setNext(nextItem.getNext());
 	}
 
