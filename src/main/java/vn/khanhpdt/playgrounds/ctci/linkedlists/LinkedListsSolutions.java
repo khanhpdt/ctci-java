@@ -78,7 +78,7 @@ class LinkedListsSolutions {
 
 	/**
 	 * Problem 2.2.1: Length is known.
-	 * <p>Worst-case complexity: O(n), where n is the length of the given list.</p>
+	 * <p>Time: O(n), where n is the length of the given list.</p>
 	 */
 	static SinglyLinkedNode<UUID, Integer> getKthToLastKnownLength(SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> list, int k) {
 		return list.getKthToLast(k);
@@ -88,9 +88,9 @@ class LinkedListsSolutions {
 	 * <p>Problem 2.2.2: Length is unknown.<p>
 	 * <p>Solution: use two pointers</p>
 	 * <p>This solution demonstrates a creative way to use multiple pointers, but it is not straightforward.</p>
-	 * <p>Another simpler solution but with the same complexity is to find the size first and then use it to
+	 * <p>Another simpler solution but with slightly higher complexity is to find the size first and then use it to
 	 * find the kth-to-last node.</p>
-	 * <p>Worst-case complexity: O(n), where n is the length of the given list.</p>
+	 * <p>Time: O(n), where n is the length of the given list.</p>
 	 */
 	static SinglyLinkedNode<UUID, Integer> getKthToLastUnknownLength(SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> list, int k) {
 		SinglyLinkedNode<UUID, Integer> pointerToInterest = list.getHead();
