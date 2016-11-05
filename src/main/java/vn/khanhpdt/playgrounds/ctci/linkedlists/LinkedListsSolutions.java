@@ -409,7 +409,7 @@ class LinkedListsSolutions {
 	/**
 	 * Problem 2.7.
 	 *
-	 * <p>Worst-case complexity: O(n), where n is the length of the given list.</p>
+	 * <p>Time: O(n), where n is the length of the given list.</p>
 	 */
 	static boolean checkPalindrome(SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> linkedList) {
 		int size = linkedList.size();
