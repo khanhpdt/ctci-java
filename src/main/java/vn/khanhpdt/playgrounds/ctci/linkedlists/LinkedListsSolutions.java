@@ -353,8 +353,8 @@ class LinkedListsSolutions {
 	/**
 	 * Problem 2.6.
 	 * <p>Solution 1: use a hash table</p>
-	 * <p>Worst-case complexity: O(n), where n is the length of the given list.</p>
-	 * <p>Need O(n) extra memory</p>
+	 * <p>Time: O(n), where n is the length of the given list.</p>
+	 * <p>Memory: O(n)</p>
 	 */
 	static SinglyLinkedNode<UUID, Integer> getFirstOfTheLoop(SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> linkedList) {
 		// this set needs O(n) memory
@@ -375,7 +375,8 @@ class LinkedListsSolutions {
 	/**
 	 * Problem 2.6.
 	 * <p>Solution 2: use two pointers</p>
-	 * <p>Worst-case complexity: O(n), where n is the length of the given list.</p>
+	 * <p>Time: O(n), where n is the length of the given list.</p>
+	 * <p>Memory: O(1)</p>
 	 */
 	static SinglyLinkedNode<UUID, Integer> getFirstOfTheLoop_2(SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> linkedList) {
 		SinglyLinkedNode<UUID, Integer> slowPointer = linkedList.getHead();
