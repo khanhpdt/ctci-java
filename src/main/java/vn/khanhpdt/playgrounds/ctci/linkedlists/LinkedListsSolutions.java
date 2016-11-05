@@ -1,5 +1,6 @@
 package vn.khanhpdt.playgrounds.ctci.linkedlists;
 
+import vn.khanhpdt.playgrounds.datastructures.linkedlists.DoubleEndedDoublyLinkedList;
 import vn.khanhpdt.playgrounds.datastructures.linkedlists.DoublyLinkedList;
 import vn.khanhpdt.playgrounds.datastructures.linkedlists.SinglyLinkedList;
 import vn.khanhpdt.playgrounds.datastructures.nodes.DoublyLinkedNode;
@@ -166,40 +167,9 @@ class LinkedListsSolutions {
 
 	/**
 	 * <p>Problem 2.5.1: The digits are stored in backward order, e.g., 617 is stored as 7 -> 1 -> 6.</p>
-	 * <p>Worst-case complexity: O(n^2) if the result is a singly linked list, and O(n) if it is a double-ended list,
-	 * where n is the length of the longer among the given lists.</p>
+	 * <p>Time: O(n), where n is the length of the longer among the given lists.</p>
 	 */
-	static SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> sumBackwardDigits(SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> firstNumber,
-	                                                            SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> secondNumber) {
-
-		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> result = new SinglyLinkedList<>();
-		SinglyLinkedNode<UUID, Integer> current1 = firstNumber.getHead();
-		SinglyLinkedNode<UUID, Integer> current2 = secondNumber.getHead();
-
-		int carry = 0;
-		while (current1 != null || current2 != null) {
-			int digit1 = current1 == null ? 0 : current1.getValue();
-			int digit2 = current2 == null ? 0 : current2.getValue();
-			int sum = digit1 + digit2 + carry;
-
-			int digitSum = sum % 10;
-			// this takes O(n). we can make it to O(1) by replacing singly linked list by the double-ended one.
-			result.insertLast(SinglyLinkedNode.from(UUID.randomUUID(), digitSum));
-
-			carry = sum / 10;
-
-			current1 = current1 == null ? null : current1.getNext();
-			current2 = current2 == null ? null : current2.getNext();
-		}
-
-		return result;
-	}
-
-	/**
-	 * <p>Problem 2.5.1: The digits are stored in backward order, e.g., 617 is stored as 7 -> 1 -> 6.</p>
-	 * <p>Worst-case complexity: O(n), where n is the length of the longer among the given lists.</p>
-	 */
-	static SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> sumBackwardDigits_2(
+	static SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> sumBackwardDigits(
 			SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> firstNumber,
 			SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> secondNumber) {
 
@@ -214,7 +184,6 @@ class LinkedListsSolutions {
 			int sum = digit1 + digit2 + carry;
 
 			int digitSum = sum % 10;
-			// this takes O(1), but remember to reverse the result before returning it
 			result.insertFirst(SinglyLinkedNode.from(UUID.randomUUID(), digitSum));
 
 			carry = sum / 10;
@@ -228,23 +197,24 @@ class LinkedListsSolutions {
 
 	/**
 	 * <p>Problem 2.5.2: The digits are stored in forward order, e.g., 617 is stored as 6 -> 1 -> 7.</p>
-	 * <p>Solution 1: simply reuse {@link #sumBackwardDigits_2(SinglyLinkedList, SinglyLinkedList)}</p>
+	 * <p>Solution 1: simply reuse {@link #sumBackwardDigits(SinglyLinkedList, SinglyLinkedList)}</p>
 	 * <p>Worst-case complexity: O(n), where n is the length of the longer among the given lists.</p>
 	 */
-	static SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> sumForwardDigits(SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> firstNumber,
-	                                                           SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> secondNumber) {
-		return sumBackwardDigits_2(firstNumber.reverse(), secondNumber.reverse()).reverse();
+	static SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> sumForwardDigits(
+			SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> firstNumber,
+			SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> secondNumber) {
+
+		return sumBackwardDigits(firstNumber.reverse(), secondNumber.reverse()).reverse();
 	}
 
 	/**
 	 * <p>Problem 2.5.2: The digits are stored in forward order, e.g., 617 is stored as 6 -> 1 -> 7.</p>
 	 * <p>Solution 2: use a doubly-linked list so that the carry can be propagated</p>
-	 * <p>Worst-case complexity: O(n^2), where n is the length of the longer among the given lists. The worst case
-	 * happens when the carry is propagated all the way back for every calculation.</p>
+	 * <p>Time: O(n^2), where n is the length of the longer among the given lists. The worst case happens when the carry
+	 * is propagated all the way back for every calculation.</p>
 	 */
 	static DoublyLinkedList sumForwardDigits_2(SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> firstNumber,
 	                                           SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> secondNumber) {
-		DoublyLinkedList<UUID, Integer> result = new DoublyLinkedList<>();
 
 		int firstLength = firstNumber.size();
 		int secondLength = secondNumber.size();
@@ -260,7 +230,10 @@ class LinkedListsSolutions {
 			shortNumber = firstNumber;
 		}
 
-		// handle the length difference
+		DoublyLinkedList<UUID, Integer> result = new DoublyLinkedList<>();
+
+		// move the pointer in the longer number so that when we start calculating the sum, two numbers effectively
+		// have the same length
 		SinglyLinkedNode<UUID, Integer> longNumberCurrent = longNumber.getHead();
 		for (int i = 0; i < firstLength - secondLength; i++) {
 			result.insert(DoublyLinkedNode.from(UUID.randomUUID(), longNumberCurrent.getValue()));
@@ -273,32 +246,33 @@ class LinkedListsSolutions {
 			int sum = longNumberCurrent.getValue() + shortNumberCurrent.getValue();
 
 			int carry = sum / 10;
+			// we will propagate the carry to higher-order positions in the result
 			if (carry > 0) {
-				// propagate carry to higher-order positions in the result
 				DoublyLinkedNode<UUID, Integer> resultCurrent = result.getHead();
-				DoublyLinkedNode<UUID, Integer> resultPrevious = null;
-				while (carry > 0) {
-					// propagating carry to the higher-order positions compared to the current sum-position
-					if (resultCurrent != null) {
-						int newValue = resultCurrent.getContent().getValue() + carry;
-						resultCurrent.getContent().setValue(newValue % 10);
+				if (resultCurrent == null) {
+					result.insert(DoublyLinkedNode.from(UUID.randomUUID(), carry));
+				}
+				else {
+					DoublyLinkedNode<UUID, Integer> resultPrevious = null;
+					// O(n)
+					while (carry > 0) {
+						if (resultCurrent != null) {
+							int newValue = resultCurrent.getContent().getValue() + carry;
+							resultCurrent.getContent().setValue(newValue % 10);
 
-						carry = newValue / 10;
-						resultPrevious = resultCurrent;
-						resultCurrent = resultCurrent.getNext();
-					}
-					// when applying the carry to the highest-order position produces a new carry
-					else if (resultPrevious != null){
-						result.insertNextTo(UUID.randomUUID(), carry, resultPrevious);
-						break;
-					}
-					// when the first sum produces carry
-					else {
-						result.insert(DoublyLinkedNode.from(UUID.randomUUID(), carry));
-						break;
+							carry = newValue / 10;
+							resultPrevious = resultCurrent;
+							resultCurrent = resultCurrent.getNext();
+						}
+						// when applying the carry to the highest-order position produces a new carry
+						else {
+							result.insertNextTo(UUID.randomUUID(), carry, resultPrevious);
+							carry = 0;
+						}
+
 					}
 				}
-			}
+			 }
 
 			result.insert(DoublyLinkedNode.from(UUID.randomUUID(), sum % 10));
 
@@ -307,6 +281,73 @@ class LinkedListsSolutions {
 		}
 
 		return result.reverse();
+	}
+
+	/**
+	 * <p>Problem 2.5.2: The digits are stored in forward order, e.g., 617 is stored as 6 -> 1 -> 7.</p>
+	 * <p>Time: O(n), where n is the length of the longer among the given lists.</p>
+	 */
+	static DoubleEndedDoublyLinkedList<DoublyLinkedNode<UUID, Integer>> sumForwardDigits_3(
+			SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> firstNumber,
+	        SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> secondNumber) {
+
+		int firstLength = firstNumber.size();
+		int secondLength = secondNumber.size();
+
+		// find out the longer and shorter number
+		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> longNumber;
+		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> shortNumber;
+		if (firstLength >= secondLength) {
+			longNumber = firstNumber;
+			shortNumber = secondNumber;
+		} else {
+			longNumber = secondNumber;
+			shortNumber = firstNumber;
+		}
+
+		DoubleEndedDoublyLinkedList<DoublyLinkedNode<UUID, Integer>> result = new DoubleEndedDoublyLinkedList<>();
+		DoubleEndedDoublyLinkedList<DoublyLinkedNode<UUID, Integer>> carries = new DoubleEndedDoublyLinkedList<>();
+
+		// move the pointer in the longer number so that when we start calculating the sum, two numbers effectively
+		// have the same length
+		SinglyLinkedNode<UUID, Integer> longNumberCurrent = longNumber.getHead();
+		for (int i = 0; i < firstLength - secondLength; i++) {
+			result.insertLast(DoublyLinkedNode.from(UUID.randomUUID(), longNumberCurrent.getValue()));
+			carries.insertLast(DoublyLinkedNode.from(UUID.randomUUID(), 0));
+			longNumberCurrent = longNumberCurrent.getNext();
+		}
+		SinglyLinkedNode<UUID, Integer> shortNumberCurrent = shortNumber.getHead();
+
+		// start calculating the sum and the carries
+		while (longNumberCurrent != null && shortNumberCurrent != null) {
+			int sum = longNumberCurrent.getValue() + shortNumberCurrent.getValue();
+			result.insertLast(DoublyLinkedNode.from(UUID.randomUUID(), sum % 10));
+			carries.insertLast(DoublyLinkedNode.from(UUID.randomUUID(), sum / 10));
+
+			longNumberCurrent = longNumberCurrent.getNext();
+			shortNumberCurrent = shortNumberCurrent.getNext();
+		}
+
+		// update sums by carries
+		DoublyLinkedNode<UUID, Integer> resultCurrent = result.getTail().getPrevious();
+		DoublyLinkedNode<UUID, Integer> carryCurrent = carries.getTail();
+		while (resultCurrent != null) {
+			int updatedSum = resultCurrent.getValue() + carryCurrent.getValue();
+			resultCurrent.getContent().setValue(updatedSum % 10);
+			if (updatedSum >= 10 && carryCurrent.getPrevious().getValue() == 0) {
+				carryCurrent.getPrevious().getContent().setValue(updatedSum / 10);
+			}
+
+			resultCurrent = resultCurrent.getPrevious();
+			carryCurrent = carryCurrent.getPrevious();
+		}
+
+		// at the most significant position in the result
+		if (carryCurrent.getValue() > 0) {
+			result.insertFirst(DoublyLinkedNode.from(UUID.randomUUID(), carryCurrent.getValue()));
+		}
+
+		return result;
 	}
 
 	/**

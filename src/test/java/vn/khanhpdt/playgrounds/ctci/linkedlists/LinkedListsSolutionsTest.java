@@ -5,6 +5,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
+import vn.khanhpdt.playgrounds.datastructures.linkedlists.DoubleEndedDoublyLinkedList;
 import vn.khanhpdt.playgrounds.datastructures.linkedlists.DoublyLinkedList;
 import vn.khanhpdt.playgrounds.datastructures.linkedlists.LinkedLists;
 import vn.khanhpdt.playgrounds.datastructures.linkedlists.SinglyLinkedList;
@@ -205,32 +206,6 @@ public class LinkedListsSolutionsTest {
 	}
 
 	@Test
-	public void testSumBackwardDigits2_1() throws Exception {
-		// 617
-		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> firstNumber = joinDigitsBackward(6, 1, 7);
-
-		// 295
-		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> secondNumber = joinDigitsBackward(2,9,5);
-
-		// 617 + 295 = 912
-		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> sum = LinkedListsSolutions.sumBackwardDigits_2(firstNumber, secondNumber);
-		assertThat(sum, singlyListContainingDigitsInOrder(2, 1, 9));
-	}
-
-	@Test
-	public void testSumBackwardDigits2_2() throws Exception {
-		// 1548
-		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> firstNumber = joinDigitsBackward(1, 5, 4, 8);
-
-		// 295
-		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> secondNumber = joinDigitsBackward(2, 9, 5);
-
-		// 1548 + 295 = 1843
-		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> sum = LinkedListsSolutions.sumBackwardDigits_2(firstNumber, secondNumber);
-		assertThat(sum, singlyListContainingDigitsInOrder(3, 4, 8, 1));
-	}
-
-	@Test
 	public void testSumForwardDigits_1() throws Exception {
 		// 617
 		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> firstNumber = joinDigitsForward(6, 1, 7);
@@ -273,7 +248,7 @@ public class LinkedListsSolutionsTest {
 		assertThat(sum, doublyListContainingDigitsInOrder(9, 0, 2));
 	}
 
-	private Matcher<DoublyLinkedList> doublyListContainingDigitsInOrder(Integer... digits) {
+	private static Matcher<DoublyLinkedList> doublyListContainingDigitsInOrder(Integer... digits) {
 		return new TypeSafeMatcher<DoublyLinkedList>() {
 			@Override
 			protected boolean matchesSafely(DoublyLinkedList list) {
@@ -333,6 +308,81 @@ public class LinkedListsSolutionsTest {
 		// 9999 + 1 = 10000
 		DoublyLinkedList sum = LinkedListsSolutions.sumForwardDigits_2(firstNumber, secondNumber);
 		assertThat(sum, doublyListContainingDigitsInOrder(1, 0, 0, 0, 0));
+	}
+
+	private static Matcher<DoubleEndedDoublyLinkedList<DoublyLinkedNode<UUID, Integer>>> doubleEndedDoublyListContainingDigitsInOrder(Integer... digits) {
+		return new TypeSafeMatcher<DoubleEndedDoublyLinkedList<DoublyLinkedNode<UUID, Integer>>>() {
+			@Override
+			protected boolean matchesSafely(DoubleEndedDoublyLinkedList<DoublyLinkedNode<UUID, Integer>> list) {
+				DoublyLinkedNode<UUID, Integer> current = list.getHead();
+				int i = 0;
+				while (current != null) {
+					if (!current.getContent().getValue().equals(digits[i])) {
+						return false;
+					}
+					current = current.getNext();
+					i++;
+				}
+				return true;
+			}
+
+			@Override
+			public void describeTo(Description description) {
+				description.appendValueList("a double ended list with ", ", ", "", digits);
+			}
+		};
+	}
+
+	@Test
+	public void testSumForwardDigits3_1() throws Exception {
+		// 617
+		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> firstNumber = joinDigitsForward(6, 1, 7);
+
+		// 285
+		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> secondNumber = joinDigitsForward(2, 8, 5);
+
+		// 617 + 285 = 902
+		DoubleEndedDoublyLinkedList<DoublyLinkedNode<UUID, Integer>> sum = LinkedListsSolutions.sumForwardDigits_3(firstNumber, secondNumber);
+		assertThat(sum, doubleEndedDoublyListContainingDigitsInOrder(9, 0, 2));
+	}
+
+	@Test
+	public void testSumForwardDigits3_2() throws Exception {
+		// 12617
+		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> firstNumber = joinDigitsForward(1, 2, 6, 1, 7);
+
+		// 285
+		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> secondNumber = joinDigitsForward(2, 8, 5);
+
+		// 12617 + 285 = 12902
+		DoubleEndedDoublyLinkedList<DoublyLinkedNode<UUID, Integer>> sum = LinkedListsSolutions.sumForwardDigits_3(firstNumber, secondNumber);
+		assertThat(sum, doubleEndedDoublyListContainingDigitsInOrder(1, 2, 9, 0, 2));
+	}
+
+	@Test
+	public void testSumForwardDigits3_3() throws Exception {
+		// 90
+		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> firstNumber = joinDigitsForward(9, 0);
+
+		// 10
+		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> secondNumber = joinDigitsForward(1, 0);
+
+		// 90 + 10 = 100
+		DoubleEndedDoublyLinkedList<DoublyLinkedNode<UUID, Integer>> sum = LinkedListsSolutions.sumForwardDigits_3(firstNumber, secondNumber);
+		assertThat(sum, doubleEndedDoublyListContainingDigitsInOrder(1, 0, 0));
+	}
+
+	@Test
+	public void testSumForwardDigits3_4() throws Exception {
+		// 9999
+		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> firstNumber = joinDigitsForward(9, 9, 9, 9);
+
+		// 1
+		SinglyLinkedList<SinglyLinkedNode<UUID, Integer>> secondNumber = joinDigitsForward(1);
+
+		// 9999 + 1 = 10000
+		DoubleEndedDoublyLinkedList<DoublyLinkedNode<UUID, Integer>> sum = LinkedListsSolutions.sumForwardDigits_3(firstNumber, secondNumber);
+		assertThat(sum, doubleEndedDoublyListContainingDigitsInOrder(1, 0, 0, 0, 0));
 	}
 
 	@Test
