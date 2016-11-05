@@ -7,7 +7,9 @@ package vn.khanhpdt.playgrounds.ctci.stacksandqueues;
  */
 public class NStacksSingleArray {
 
-	private int nStacks;
+	private final int nStacks;
+
+	private final int nItemsPerStack;
 
 	/**
 	 * A single array for three stacks
@@ -19,6 +21,9 @@ public class NStacksSingleArray {
 
 	public NStacksSingleArray(int nStacks) {
 		this.nStacks = nStacks;
+
+		// default value
+		nItemsPerStack = 20;
 
 		this.stacks = new Stack[nStacks];
 		for (int i = 0; i < nStacks; i++) {
@@ -33,29 +38,32 @@ public class NStacksSingleArray {
 
 		private final int stackIndex;
 
-		private int size;
+		private int nItems;
 
 		private Stack(int stackIndex) {
 			this.stackIndex = stackIndex;
-			this.size = 0;
+			this.nItems = 0;
 		}
 
 		public void push(Object element) {
-			elements[getIndex()] = element;
-			size++;
+			elements[getPositionOnCommonArray()] = element;
+			nItems++;
 		}
 
 		/**
 		 * Gets the index of the element of this stack stored in the common array.
 		 *
 		 */
-		private int getIndex() {
-			return nStacks * size + stackIndex;
+		private int getPositionOnCommonArray() {
+			// the array area allocated to each stack is fixed
+			return (stackIndex * nItemsPerStack) + nItems;
+			// another approach is to interleave the elements in different stacks
+			// e.g., element i of stack j can be put into the position at (nStacks * i + j)
 		}
 
 		public Object pop() {
-			Object element = elements[getIndex()];
-			size--;
+			Object element = elements[getPositionOnCommonArray()];
+			nItems--;
 			return element;
 		}
 	}
