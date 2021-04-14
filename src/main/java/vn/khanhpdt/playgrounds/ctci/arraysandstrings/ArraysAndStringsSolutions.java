@@ -13,7 +13,8 @@ import java.util.regex.Pattern;
 class ArraysAndStringsSolutions {
 
 	/**
-	 * <p>Problem 1.1</p>
+	 * <p>Problem 1.1: Implement an algorithm to determine if a string has all unique characters.</p>
+	 *
 	 * <p>Solution 1: a straightforward solution</p>
 	 * <p>Complexity: O(n^2), where n = length of the string</p>
 	 */
@@ -114,7 +115,7 @@ class ArraysAndStringsSolutions {
 	}
 
 	/**
-	 * Problem 1.3.
+	 * Problem 1.3: Given two strings, write a method to decide if one is a permutation of the other.
 	 *
 	 * <p>Complexity: O(n), where n = length of the strings</p>
 	 */
@@ -151,7 +152,7 @@ class ArraysAndStringsSolutions {
 	}
 
 	/**
-	 * Problem 1.4.
+	 * Problem 1.4: Write a method to replace all spaces in a string with '%20'
 	 *
 	 * <p>Time: O(n^2) in the worst case, where n = length of the strings. The main computation is the shifting of the
 	 * array elements.</p>
