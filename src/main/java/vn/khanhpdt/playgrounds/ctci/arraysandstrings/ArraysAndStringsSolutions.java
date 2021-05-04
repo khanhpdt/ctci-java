@@ -78,7 +78,7 @@ class ArraysAndStringsSolutions {
 	}
 
 	/**
-	 * Problem 1.2.
+	 * Problem 1.2: Given a string, produce the reversed of the string.
 	 *
 	 * <p>Time: O(n), where n = length of the string</p>
 	 * <p>Memory: O(n)</p>
