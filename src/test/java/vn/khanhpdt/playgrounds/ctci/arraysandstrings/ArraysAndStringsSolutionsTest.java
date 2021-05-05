@@ -90,6 +90,12 @@ public class ArraysAndStringsSolutionsTest {
 	}
 
 	@Test
+	public void testCheckPalindromePermutation() {
+		assertThat(ArraysAndStringsSolutions.checkPalindromePermutation("Tact Coa"), is(true));
+		assertThat(ArraysAndStringsSolutions.checkPalindromePermutation("Tact aCoa"), is(false));
+	}
+
+	@Test
 	public void testCompressString_1() throws Exception {
 		String s = "aabcccccaaa";
 

@@ -202,6 +202,29 @@ class ArraysAndStringsSolutions {
 	}
 
 	/**
+	 * Problem 1.4 (3rd edition): Given a string, write a function to check if it is a permutation of a palindrome.
+	 *
+	 */
+	static boolean checkPalindromePermutation(String s) {
+		Map<Character, Integer> counts = new HashMap<>();
+		for (char ch : s.toLowerCase().toCharArray()) {
+			if (ch != ' ') {
+				int count = counts.getOrDefault(ch, 0);
+				counts.put(ch, count + 1);
+			}
+		}
+
+		int nOdds = 0;
+		for (char ch : counts.keySet()) {
+			if (counts.get(ch) % 2 != 0) {
+				nOdds++;
+			}
+		}
+
+		return nOdds <= 1;
+	}
+
+	/**
 	 * Problem 1.5.
 	 *
 	 * <p>Time: O(n), where n = length of the given string</p>
