@@ -96,6 +96,14 @@ public class ArraysAndStringsSolutionsTest {
 	}
 
 	@Test
+	public void testIsOneOrZeroEditAway() {
+		assertThat(ArraysAndStringsSolutions.isOneOrZeroEditAway("pale", "ple"), is(true));
+		assertThat(ArraysAndStringsSolutions.isOneOrZeroEditAway("pales", "pale"), is(true));
+		assertThat(ArraysAndStringsSolutions.isOneOrZeroEditAway("pale", "bale"), is(true));
+		assertThat(ArraysAndStringsSolutions.isOneOrZeroEditAway("pale", "bake"), is(false));
+	}
+
+	@Test
 	public void testCompressString_1() throws Exception {
 		String s = "aabcccccaaa";
 

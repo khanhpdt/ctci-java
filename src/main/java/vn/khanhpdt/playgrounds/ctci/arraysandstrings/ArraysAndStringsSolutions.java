@@ -222,6 +222,41 @@ class ArraysAndStringsSolutions {
     }
 
     /**
+     * Problem 1.5 (3rd edition): There are three types of edits that can be performed on strings: insert a character,
+     * remove a character, or replace a character. Given two strings, write a function to check if they are
+     * one edit (or zero edits) away.
+     */
+    static boolean isOneOrZeroEditAway(String s1, String s2) {
+        if (s1.length() >= s2.length() + 2 || s1.length() + 2 <= s2.length()) {
+            return false;
+        }
+
+        int i = 0, j = 0, editCount = 0;
+        while (i < s1.length() && j < s2.length() && editCount <= 1) {
+            if (s1.charAt(i) == s2.charAt(j)) {
+                i++;
+                j++;
+            } else if (s1.length() < s2.length()) {
+                editCount++; // imagine that we would need to insert s2[j] to s1
+                j++;
+            } else if (s1.length() > s2.length()) {
+                editCount++; // insert s1[i] to s2
+                i++;
+            } else {
+                editCount++; // replace in either s1 or s2
+                i++;
+                j++;
+            }
+        }
+
+        if (editCount == 0) {
+            return true;
+        }
+
+        return editCount == 1 && i == s1.length() && j == s2.length();
+    }
+
+    /**
      * Problem 1.5: Implement a method to perform basic string compression using the counts of repeated characters.
      *
      * <p>Time: O(n), where n = length of the given string</p>
