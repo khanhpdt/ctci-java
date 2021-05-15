@@ -379,7 +379,7 @@ class ArraysAndStringsSolutions {
     /**
      * Problem 1.7.
      *
-     * <p>Time: O(m*n*(m+n)), where m and n are the number of rows and columns of the given matrix.</p>
+     * <p>Time: O(m*n), where m and n are the number of rows and columns of the given matrix.</p>
      * <p>Memory: O(m + n)</p>
      */
     static Integer[][] setZeros_2(Integer[][] matrix) {
